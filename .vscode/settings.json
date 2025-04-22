@@ -9,5 +9,6 @@
         "rank.C": "cpp"
     },
     "editor.fontSize": 15,
-    "notebook.output.wordWrap": true
+    "notebook.output.wordWrap": true,
+    "editor.wordWrap": "on"
 }
