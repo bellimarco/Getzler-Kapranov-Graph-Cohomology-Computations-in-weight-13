@@ -1,0 +1,449 @@
+\documentclass[12pt]{amsart}
+\usepackage{tikz-cd}
+%\usepackage{enumitem}
+%\setlist[description]{leftmargin=\parindent,labelindent=\parindent}
+\usepackage{amssymb}
+\usepackage{amsmath,amscd}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{url}
+\usepackage{cite}
+\usepackage{fullpage}
+\usepackage[hidelinks]{hyperref}
+\usepackage{verbatim}
+\usepackage{comment}
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usetikzlibrary{matrix}
+ \usetikzlibrary{shapes}
+\usetikzlibrary{arrows,decorations.markings}
+\usepackage{tikz-cd}
+\usepackage{stmaryrd}
+
+\pgfarrowsdeclare{bad to}{bad to}
+{
+  \pgfarrowsleftextend{-2\pgflinewidth}
+  \pgfarrowsrightextend{\pgflinewidth}
+}
+{
+  \pgfsetlinewidth{0.8\pgflinewidth}
+  \pgfsetdash{}{0pt}
+  \pgfsetroundcap
+  \pgfsetroundjoin
+  \pgfpathmoveto{\pgfpoint{-3\pgflinewidth}{4\pgflinewidth}}
+  \pgfpathcurveto
+  {\pgfpoint{-2.75\pgflinewidth}{2.5\pgflinewidth}}
+  {\pgfpoint{0pt}{0.25\pgflinewidth}}
+  {\pgfpoint{0.75\pgflinewidth}{0pt}}
+  \pgfpathcurveto
+  {\pgfpoint{0pt}{-0.25\pgflinewidth}}
+  {\pgfpoint{-2.75\pgflinewidth}{-2.5\pgflinewidth}}
+  {\pgfpoint{-3\pgflinewidth}{-4\pgflinewidth}}
+  \pgfusepathqstroke
+}
+
+
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{goal}[thm]{Goal}
+\newtheorem{deflemma}[thm]{Definition/Lemma}
+\newtheorem{construction}[thm]{Construction}
+
+\theoremstyle{definition}
+\newtheorem{definition}[thm]{Definition}
+\newtheorem{example}[thm]{Example}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{question}[thm]{Question}
+
+\numberwithin{equation}{section}
+\newcommand{\semis}{\mathrm{ss}}
+\newcommand{\s}{\mathsf{S}}
+\renewcommand{\l}{\mathsf{L}}
+\newcommand{\nf}{\mathrm{nf}}
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\cc}{\mathbb{C}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\W}{\mathcal{W}}
+\renewcommand{\ss}{\mathbb{S}}
+\newcommand{\LL}{\mathbb{L}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\p}{\mathbb{P}}
+\newcommand{\pp}{\mathbb{P}}
+\newcommand{\A}{\mathcal{A}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\Xb}{\overline{X}}
+\newcommand{\F}{\mathcal{F}}
+\renewcommand{\P}{\mathcal{P}}
+\DeclareMathOperator{\cl}{cl}
+%\newcommand{\E}{\mathcal{E}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\OC}{\mathcal{O}_C}
+\newcommand{\Hur}{\mathcal{H}}
+\newcommand{\Mg}{\mathcal{M}_g}
+\DeclareMathOperator{\ct}{ct}
+\DeclareMathOperator{\rt}{rt}
+\renewcommand{\tilde}{\widetilde}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\nclim}{nclim}
+\DeclareMathOperator{\Hyp}{Hyp}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\td}{td}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+%\DeclareMathOperator{\SP}{Sp}
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\lb}{\mathcal{L}}
+\DeclareMathOperator{\Hilb}{Hilb}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\psh}{Psh}
+\DeclareMathOperator{\sh}{Sh}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\tor}{tor}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\BSL}{BSL}
+\DeclareMathOperator{\BPGL}{BPGL}
+\DeclareMathOperator{\BGL}{BGL}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\PSp}{PSp}
+\DeclareMathOperator{\PGSp}{PGSp}
+\newcommand{\grw}{\mathrm{Gr}^W_k}
+\DeclareMathOperator{\BPGSp}{BPGSp}
+\DeclareMathOperator{\BSp}{BSp}
+\DeclareMathOperator{\trig}{trig}
+\DeclareMathOperator{\sign}{sign}
+
+\DeclareMathOperator{\Gal}{Gal}
+
+%\DeclareMathOperator{\sp}{span}
+\renewcommand{\gg}{\mathbb{G}}
+\newcommand{\ee}{{\vec{e}} \nobreak\hspace{.16667em plus .08333em}'}
+\newcommand{\dn}{\mathrm{dn}}
+\newcommand{\lstw}{\mathsf{L}\mathsf{S}_{12}}
+
+\usepackage{wrapfig}
+
+\renewcommand{\bar}{\overline}
+\newcommand{\Mb}{\overline{\M}}
+\newcommand{\Cb}{\overline{\mathcal{C}}}
+
+\newcommand{\pb}{\mathrm{PB}}
+
+%\renewcommand{\S}{\mathcal{S}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage[table]{xcolor}
+\usepackage{ytableau,tikz,varwidth, tikz-cd}
+\usepackage{hyperref}
+
+
+
+%\usetikzlibrary{calc, snakes, positioning}
+\usetikzlibrary{calc, decorations, positioning}
+\usepackage[enableskew]{youngtab}
+\usepackage{enumerate}
+\usepackage{amssymb, mathscinet}
+
+\usepackage[all,cmtip]{xy}
+
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usetikzlibrary{matrix}
+\usetikzlibrary{shapes}
+\usetikzlibrary{arrows, automata}
+\usetikzlibrary{decorations,decorations.pathmorphing,decorations.pathreplacing,decorations.markings}
+\usetikzlibrary{through}
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
+
+\tikzset{every picture/.style={baseline=-.65ex} }
+\tikzset{ext/.style={circle, draw,inner sep=1pt,scale=1.4},int/.style={circle,draw,fill,inner sep=1pt},nil/.style={inner sep=1pt}}
+
+\tikzset{every loop/.style={draw}}
+\tikzset{
+  crossed/.style={
+    decoration={markings,mark=at position .5 with {\arrow{|}}},
+    postaction={decorate},
+    shorten >=0.4pt}}
+
+\tikzset{->-/.style={decoration={
+    markings,
+    mark=at position .9 with {\arrow{>}}},postaction={decorate}}}
+
+\tikzstyle{every node}=[scale=1.2]
+
+    
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\sig}{\sigma}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\ZZ}{\mathbb{Z}}
+% \newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\bS}{\mathbb{S}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\ocM}{\overline{\mathcal{M}}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\SV}{\mathrm{SV}}
+\newcommand{\SYT}{\mathrm{SYT}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\gray}[1]{\textcolor{gray}{#1}}
+\newcommand{\angles}[1]{\langle #1 \rangle}
+\newcommand{\on}{\operatorname}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\mc}{\mathcal}
+\newcommand{\ov}{\overline}
+\newcommand{\un}{\underline}
+\newcommand{\Un}{\on{Un}}
+\newcommand{\Gmw}{\mathbf{G}}
+\newcommand{\ord}{\on{ord}}
+
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\ul}{\underline}
+\newcommand{\st}{\scriptstyle}
+\newcommand{\wh}{\widehat}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Jgn}{J_{g,n}}
+\newcommand{\Jgnnr}{\Jgn^{\rm nr}}
+\newcommand{\Jgnp}{\Jgn^{\rm p}}
+\newcommand{\Jgnpnr}{\Jgn^{\rm p, nr}}
+
+\newcommand{\Exh}{\on{Exh}}
+\newcommand{\val}{\mathrm{val}}
+\newcommand{\bfT}{\mathbf T}
+
+\newcommand{\MM}{\overline{\mathcal{M}}}
+\newcommand{\RR}{\overline{\mathcal{R}}}
+\newcommand{\Feyn}{\mathrm{Feyn}}
+\newcommand{\Ind}{\mathrm{Ind}}
+
+\newcommand{\bbS}{\mathbb{S}}
+
+\newcommand{\bGK}{\overline{\GK}{}}
+\newcommand{\hide}[1]{}
+
+%% Mark to fill in:
+\newcommand{\fillin}[1]{
+
+\vspace{0.5cm}\textcolor{blue}{Fill in: #1}\vspace{0.5cm}
+
+}
+%%
+
+
+\newtheorem{Fact}[thm]{Fact}
+\newenvironment{fact}
+  {\begin{Fact}\rm}{\end{Fact}}
+
+\newtheorem{Theorem}[thm]{Theorem}
+\newenvironment{theorem}
+  {\begin{Theorem}}{\end{Theorem}}
+  
+\newtheorem{Lemma}[thm]{Lemma}
+\newenvironment{lemma}
+  {\begin{Lemma}}{\end{Lemma}}
+
+
+\newtheorem{Remark}[thm]{Remark}
+\newenvironment{remark}
+  {\begin{Remark}\rm}{\end{Remark}}
+
+\newtheorem{Proposition}[thm]{Proposition}
+\newenvironment{proposition}
+  {\begin{Proposition}}{\end{Proposition}}
+
+\newtheorem{Corollary}[thm]{Corollary}
+\newenvironment{corollary}
+  {\begin{Corollary}}{\end{Corollary}}
+
+\newtheorem{Conjecture}[thm]{Conjecture}
+\newenvironment{conjecture}
+  {\begin{Conjecture}\rm}{\end{Conjecture}}
+  
+
+\newcommand{\sX}{{\underline{X}}}
+  
+\newcommand{\red}{\color{red}}
+\newcommand{\green}{\color{green}}
+\newcommand{\blue}{\color{blue}}
+
+
+\newcommand \mysp {\vspace{1in}}
+
+
+  \theoremstyle{definition} % text is not in italics
+\newtheorem{ex}[thm]{Example}
+\newtheorem{defn}[thm]{Definition}
+  
+\theoremstyle{remark}
+\newtheorem{obs}[thm]{Observation}
+
+
+
+
+\newcommand{\Finiso}{\mathcal Fin^{iso}}
+\newcommand{\Fininj}{\mathcal Fin^{inj}}
+\newcommand{\Cube}{\mathrm{Cube}}
+\newcommand{\La}{\Lambda}
+\newcommand{\dgVect}{dg\mathcal Vect}
+\newcommand{\Det}{\mathrm{Det}}
+\newcommand{\vspan}{\mathrm{span}}
+\newcommand{\Res}{\mathrm{Res}}
+\newcommand{\Free}{\mathrm{Free}}
+\newcommand{\Com}{\mathrm{Com}}
+\newcommand{\gr}{\mathrm{gr}}
+\newcommand{\GC}{\mathsf{GC}}
+% \newcommand{\fHGC}{S\HGC}}
+\newcommand{\fHGC}{\mathsf{fHGC}}
+\newcommand{\HGC}{\mathsf{HGC}}
+\newcommand{\Graphs}{\mathsf{Graphs}}
+\newcommand{\GK}{\mathsf{GK}}
+\newcommand{\lp}{\text{-loop}}
+
+\newcommand{\omis}{ \begin{tikzpicture}
+    \node (v) at (0,0) {$\omega$};
+    \node (w) at (1,0) {$1$};
+    \draw (v) edge (w);
+  \end{tikzpicture}
+  \cdots 
+  \begin{tikzpicture}
+    \node (v) at (0,0) {$\omega$};
+    \node (w) at (1,0) {$n$};
+    \draw (v) edge (w);
+  \end{tikzpicture}}
+\newcommand{\tripod}{
+\begin{tikzpicture}
+    \node[int] (i) at (0,.5) {};
+    \node (v1) at (-.5,-.2) {$\omega$};
+    \node (v2) at (0,-.2) {$\omega$};
+    \node (v3) at (.5,-.2) {$\omega$};
+  \draw (i) edge (v1) edge (v2) edge (v3);
+  \end{tikzpicture}
+}
+\newcommand{\tripods}{
+\tripod 
+\cdots 
+\tripod
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\newcommand{\sam}[1]{{ \sf $\diamondsuit\diamondsuit\diamondsuit$ {\textcolor{red}{Sam: [#1]}}}}
+
+\newcommand{\thomas}[1]{{ \sf $\diamondsuit\diamondsuit\diamondsuit$ {\textcolor{magenta}{Thomas: [#1]}}}}
+
+\newcommand{\newtext}[1]{{ {\textcolor{blue}{#1}}}}
+
+
+\newcommand{\hannah}[1]{{\color{teal} ($\spadesuit$ Hannah: #1)}}
+\newcommand{\samc}[1]{{\color{red} ($\spadesuit$ Sam C: #1)}}
+\newcommand{\samp}[1]{{\color{violet} ($\spadesuit$ Sam P: #1)}}
+
+
+\usepackage{color, colortbl}
+\usepackage{array, adjustbox}
+
+\definecolor{Gray}{gray}{0.9}
+
+\newcolumntype{g}{>{\columncolor{Gray}}c}
+\newcolumntype{M}{V{6cm}} %M is for Maximal column
+\newcolumntype{N}{V{12cm}} %M is for Maximal column
+
+\author{Marco Belli}
+\author{Thomas Willwacher}
+
+% \thanks{
+% thanks note and support.....
+% }
+
+
+
+
+
+\title{Getzler-Kapranov Graph Complex cohomology computations in low excesses}
+
+
+
+\begin{document}
+
+\begin{abstract}
+    We carry out computations in the Getzler-Kapranov graph complex in weight $13$ following the approach of \cite{CLPW2} by classifying graphs using the excess $e(g,n)=3(g-1)+2n-22$ as complexity function. The classification is automated in Python using SageMath.
+\end{abstract}
+
+\maketitle
+
+%\setcounter{tocdepth}{1}
+%\tableofcontents
+
+
+
+
+\input{Introduction}
+
+
+\input{SimplifiedGraphComplex}
+
+
+%\input{Low Excess Computations}
+%\section{Computer Implementation}
+
+\input{Appendix}
+
+
+\bibliographystyle{amsplain}
+\bibliography{refs}
+\end{document}

@@ -1,0 +1,338 @@
+
+
+\section{Graph Complexes in weight 13}
+
+In this sections, we recall the definition of the Getzler-Kapranov graph complex and its simplified version obtained as a quasi-isomorphic quotient in \cite{CLPW2}. Then we model combinatorially it's weight 13 graded piece by plugging in the graph representations of the cohomology groups $H^{12,1}(\MM_{1,n_{\overline{v}}})$, $H^{11,0}(\MM_{1,n})$, $H^{1,1}(\MM_{g,n})$.
+
+\subsection{The simplified Getzler-Kapranov graph complex in weight 13}
+In the following we will consider stable graphs $\Gamma\in\Gamma((g,n))$ equipped with a decoration $(\gamma_v)_{v\in V(\Gamma)}$ of their vertices by cohomology classes $\gamma_v \in H^{*}(\MM_{g_v,n_v})$ which behaves tensorially in $v$, and with an alternating ordering of the internal edges $(o_e)_{e\in E(\Gamma)}$; we will refer to such graphs $(\Gamma,\gamma\otimes o)$ shortly as \emph{decorated graphs}. Isomorphisms $\phi:\Gamma\xrightarrow{\sim}\Gamma'$ of stable graphs act on the decorated graphs by permutation:
+\[ \phi_* (\Gamma,(\gamma_v)_{v}\otimes (o_e)_{e}) = (\Gamma',(\gamma_v)_{\phi(v)}\otimes (o_e)_{\phi(e)}). \]
+
+The Getzler-Kapranov graph complex is denoted by the space of coinvariants of decorated graphs under isomorphisms:
+\begin{multline}\label{equ:GKdef}
+    \GK_{g,n} = 
+    \bigg( \bigoplus_{\Gamma\in\Gamma((g,n))} \bigotimes_{v\in V(\Gamma)}H^{*}(\MM_{g_v,n_v})\otimes \Q[-1]^{\otimes |E(\Gamma)|} \bigg) \Big/ \sim \\
+    = \bigoplus_{[\Gamma]\in[\Gamma((g,n))]} \bigg(
+    \bigotimes_{v\in V(\Gamma)}H^{*}(\MM_{g_v,n_v})\otimes \Q[-1]^{\otimes |E(\Gamma)|} \bigg) \Big/ \text{Aut}_{\Gamma},
+\end{multline}
+where the $\Gamma((g,n))$ are stable graphs and $[\Gamma((g,n))]$ their isomorphism classes, of which there are only finitely for every pair $(g,n)$. Automorphisms of stable graphs are understood to fix the $n$ labeled hairs.
+
+The \emph{weight} of a decorated graph $(\Gamma,\gamma\otimes o)$ with all $\gamma_v$ of pure cohomological degree $k_v$ is $\kappa=\sum_v k_v$. For each $\kappa\in\NN$, the homogeneous slice of weight $\kappa$ of $\GK_{g,n}$ is then given by 
+\begin{equation}\label{equ:GKweight}
+    \GK^{\kappa}_{g,n} 
+    = \bigoplus_{[\Gamma]\in[\Gamma((g,n))]} \bigoplus_{\substack{\lambda\,\text{partition} \\ \text{of}\,\kappa}} \bigg( \bigoplus_{\substack{k:V(\Gamma)\rightarrow \NN \\ k\,\text{respects}\,\lambda}}
+    \bigotimes_{v\in V(\Gamma)}H^{k_v}(\MM_{g_v,n_v})\otimes \Q[-1]^{\otimes |E(\Gamma)|} \bigg) \Big/ \text{Aut}_{\Gamma},
+\end{equation}
+
+The grading of the complex $\GK_{g,n}$ is given by the weight plus the number of internal edges of the stable graphs. For the definition of the differential we refer to \cite{CLPW2}, later we will represent it's the action on the graphical description of the generators of the simplified complex.
+
+Since $H^{k}(\MM_{g,n})=0$ for odd $k<11$ \cite{BergstromFaberPayne}, the only weight labelings $k:V(\Gamma)\rightarrow\NN$ with $13=\sum_v k_v$ giving rise to non trivial decorated graphs are the ones with zero weight on every vertex except either $(A)$ $k_{\bar{v}}=13$ or $(B)$ $k_{\bar{v}}=11$, $k_{\tilde{v}}=2$ for exactly one special vertex $\bar{v}$ and in case $(B)$ a second vertex $\tilde{v}$. We will denote by $N_{\bar{v}}$ and $N_{\tilde{v}}$ the hairs and half-edges at $\bar{v}$ and $\tilde{v}$. In both cases, automorphisms of decorated graphs must fix the special vertices.
+
+\begin{multline}\label{equ:GK13}
+    \GK^{13}_{g,n}
+    = \bigoplus_{\substack{ [\Gamma]\in[\Gamma((g,n))] \\ \bar{v}\in V(\Gamma)}}
+    \left( H^{13}(\MM_{g_{\bar{v}},n_{\bar{v}}}) \otimes \Q[-1]^{\otimes |E(\Gamma)|} \right)/\text{Aut}_{\Gamma,\bar{v}} \\
+    \oplus \bigoplus_{\substack{ [\Gamma]\in[\Gamma((g,n))] \\ \bar{v}\neq\tilde{v}\in V(\Gamma)}}
+    \left( H^{11}(\MM_{g_{\bar{v}},n_{\bar{v}}}) \otimes H^{2}(\MM_{g_{\tilde{v}},n_{\tilde{v}}}) \otimes \Q[-1]^{\otimes |E(\Gamma)|} \right)/\text{Aut}_{\Gamma,\bar{v},\tilde{v}}
+\end{multline}
+% \[  \GK^{13}_{g,n} 
+%     = \bigoplus_{\substack{ [\Gamma]\in[\Gamma((g,n))] \\ \bar{v}\in V(\Gamma) \\ \text{no odd symmetries} \\ \text{fixing}\,\bar{v} }}
+%     H^{13}(\MM_{g_{\bar{v}},n_{\bar{v}}}) \;\oplus
+%     \bigoplus_{\substack{ [\Gamma]\in[\Gamma((g,n))] \\ \bar{v}\neq\tilde{v}\in V(\Gamma) \\ \text{no odd symmetries} \\ \text{fixing}\,\bar{v},\tilde{v} }}
+%     H^{11}(\MM_{g_{\bar{v}},n_{\bar{v}}}) \otimes H^{2}(\MM_{g_{\tilde{v}},n_{\tilde{v}}}) \]
+
+
+As the cohomology groups come equipped with a $\Q$-Hodge decomposition \ref{thm:GroupsHodgeDeco}, we obtain accordingly a decomposition $\GK_{g,n}^{13}\otimes\CC = \GK_{g,n}^{12,1} \oplus \GK_{g,n}^{1,12}$, where $\GK_{g,n}^{12,1}$ is obtained as in \ref{equ:GK13} by replacing $H^{13}, H^{11}$ and $H^{2}$ by $H^{12,1}, H^{11,0}$ and $H^{1,1}$ respectively. After quotienting by an appropriate subspace closed under the differential, one can obtain a quasi-isomorphic complex $\GK_{g,n}^{13}\twoheadrightarrow \bGK_{g,n}^{13}$ generated by a much smaller set of decorated graphs \cite[Section 2.2]{CLPW2}. This quasi-isomorphism preserves the above $\Q$-Hodge decomposition: $\bGK_{g,n}^{13}\otimes\CC = \bGK_{g,n}^{12,1} \oplus \bGK_{g,n}^{1,12}$. From now on we will focus on the $\bGK_{g,n}^{12,1}$ part, which is generated by the subset of decorated graphs satisfying the following properties:
+
+\begin{enumerate}
+    \item[1)] Weight zero vertices have genus zero, valence at least $3$ and don't have loops.
+    \item[2)] In both cases $(A)$ and $(B)$ the special vertex $\bar{v}$ has $g_{\bar{v}}=1$.
+    \item[2b)] In case $(B)$ the special vertex $\tilde{v}$ has either $g_{\tilde{v}}=0$, or $g_{\tilde{v}}=1$ and $n_{\tilde{v}}=1$.
+\end{enumerate}
+
+Using the presentation of the cohomology groups described in \ref{sec:appendix}, we consider the subspace of  $\GK_{g,n}^{12,1}$  spanned by generators with propreties $1),2),2b)$ and we exchange the order of the cohomology relations and the coinvariants relations to obtain 
+\begin{multline}\label{equ:GK12,1}
+    \bGK_{g,n}^{12,1}  \twoheadleftarrow  \bigoplus_{\substack{[\Gamma],\bar{v},\,B\subseteq A\subseteq N_{\bar{v}} \\ |B|=10, |A^c|\geq 3}} \left( \left<Z_{B\subseteq A}\right> \otimes \Q[-1]^{\otimes |E(\Gamma)|} \right)/\text{Aut}_{\Gamma,\bar{v}}^{B,A} \\
+    \oplus \bigoplus_{\substack{[\Gamma],\bar{v},\,E\subseteq N_{\bar{v}} \\ |E|=12}} \bigg( \bigoplus_{\substack{B\subseteq A\subseteq N_{\bar{v}} \\  B\sqcup A^c=E}} \left( \left<Z_{B\subseteq A}\right> \otimes \Q[-1]^{\otimes |E(\Gamma)|} \right)/\text{Aut}_{\Gamma,\bar{v}}^{B,A} \bigg) \Big/ \{\substack{\text{weight 13}\\\text{relations}}\} \\
+    \oplus \bigoplus_{[\Gamma],\bar{v},\tilde{v}} \bigg( \bigoplus_{\substack{B\subseteq N_{\tilde{v}},|B|=11\\ A\sqcup A'=N_{\tilde{v}},|A|,|A'|\geq 2}} \left( \left<\omega_B\otimes\delta\{\substack{A \\ A'}\}\right> \otimes \Q[-1]^{\otimes |E(\Gamma)|}\right) / \text{Aut}_{\Gamma,\bar{v}}^{B,\{A,A'\} } \bigg) \Big/ \{\substack{\text{weight 11 and 2}\\\text{relations}}\} \\
+    \oplus \bigoplus_{[\Gamma],\bar{v},\tilde{v}} \bigg( \bigoplus_{\substack{B\subseteq N_{\tilde{v}}\\ |B|=11}} \left( \left<\omega_B\otimes \delta_{irr}\right> \otimes \Q[-1]^{\otimes |E(\Gamma)|}\right) / \text{Aut}_{\Gamma,\bar{v}}^B \bigg) \Big/ \{\substack{\text{weight 11}\\\text{relations}}\} ,
+\end{multline}
+where, for example in the third term, Aut$_{\Gamma,\bar{v},\tilde{v}}^{B,\{A,A'\}}$ is the group of automorphisms leaving the set $B$ and the partition $A\sqcup A'$ invariant.
+These are precisely the symmetries of the decorated graphs $(\Gamma,Z_{B\subseteq A}\otimes o)$, $(\Gamma,\omega_B\otimes\delta\{\substack{A \\ A'\otimes o}\})$ and $(\Gamma,\omega_B\otimes \delta_{irr}\otimes o)$ respectively, which act by the sign of the permutation of the half-edges of $\bar{v}$ in $B$ multiplied by the sign of the permutation on the internal edges $E(\Gamma)$. In each case, the coinvariants relations restrict to killing the decorated graphs with odd symmetry. In the following we will consider the familiy of generators indexed by all the direct sums in \ref{equ:GK12,1} whose automorphism group does not have odd symmetries. In particular we can impose the further restriction on the generators:
+\begin{enumerate}
+    \item[1.2)] There are no multiple edges, except possibly for edges incident at $\bar{v}$.
+\end{enumerate}
+
+The relations introduced by the quotient manifest as follows between the generators:\\
+\begin{minipage}[t]{0.44\textwidth}
+Case $(A)$:
+\begin{enumerate}
+    \item[3a)] Graphs with a loop $(s,t)$ at $\bar{v}$ and decorated by a $Z_{B\subseteq A}$ with $|A^c|\geq 3$, $s,t\in A^c$ are set to zero.
+\end{enumerate}
+\end{minipage}
+\begin{minipage}[t]{0.56\textwidth}
+Case $(B)$:
+\begin{enumerate}
+    \item[4b)] Graphs with $g_{\tilde{v}}=0$ and a loop at $\tilde{v}$ decorated by a class in the image of the pullback $H^2(\MM_{1,n_{\tilde{v}}-2})\xrightarrow{\xi_{*}} H^2(\MM_{0,n_{\tilde{v}}})$ are set to zero. 
+\end{enumerate}
+\end{minipage}%
+\begin{enumerate}
+    \item[4ab)] Case $(A)$ graphs with a loop $(s,t)$ at $\bar{v}$ and decorated by a $Z_{B\subseteq A}$ with $A^c=\{s,t\}$ are identified with $\frac{1}{12}$ times the case $(B)$ graph obtained by adding a genus $1$ vertex $\tilde{v}$, connecting it only to $\bar{v}$ through an edge $(p',p)$, redecorating $\bar{v}$ with the weight $11$ class $\omega_{B\sqcup p}$ and decorating $\tilde{v}$ with the weight $2$ class $\delta_{irr}$.
+\end{enumerate}
+
+We represent these relations using the graphical depictions of cohomology classes in \ref{sec:appendix}. When talking about the depiction, the genus one vertex and the two ends of the crossed edge will be referenced by the keys $\bar{v}$ and $\tilde{v}$ in case $(A)$ and  $\bar{v}$,$\tilde{v}_1$ and $\tilde{v}_2$ in case $(B)$.
+
+\[
+    \text{4b): }
+    \begin{tikzpicture}
+        \node[int] (v) at (0,0) {};
+        \node[int] (w) at (0.5,0) {};
+        \node (s) at (-.6,.5)  {\tiny$s$};
+        \node (t) at (-.6,-.5)  {\tiny$t$};
+        \draw (v) to [out=135,in=225,distance=1.3cm] (v) edge[dashed] +(-.5,.2) edge[dashed] +(-.2,.5) edge[dashed] +(-.5,-.2) edge[dashed] +(-.2,-.5) edge[crossed] (w)
+        (w) edge +(.5,-.5) edge +(.5,.5) edge[dashed] +(.5,.2) edge[dashed] +(.5,-.2) edge[dashed] +(.2,.5) edge[dashed] +(.2,-.5);
+        \draw [decorate,decoration={brace,amplitude=5pt,mirror}]
+        (-.8,.5) -- (-.8,-.5) node[midway,xshift=-1em]{$A$};
+        \draw [decorate,decoration={brace,amplitude=5pt}]
+        (1.1,.5) -- (1.1,-.5) node[midway,xshift=1em]{$A'$};
+    \end{tikzpicture}
+    = 0
+    \hspace{1cm}
+    \sum_{\substack{A\sqcup A'= N_{\tilde{v}}\\ |A|,|A'|\geq 2 \\ s\in A, t\in A'}}
+    \begin{tikzpicture}
+        \node[int] (v) at (0,0) {};
+        \node[int] (w) at (0.5,0) {};
+        \node (s) at (-.1,.5)  {\tiny$s$};
+        \node (t) at (.6,.5)  {\tiny$t$};
+        \draw (v) edge +(-.5,-.5) edge[dashed] +(-.5,.5) edge[dashed] +(-.5,.2) edge[dashed] +(-.5,-.2) edge[dashed] +(-.2,-.5) edge[crossed] (w) edge[bend left=90,distance=.8cm] (w)
+        (w) edge +(.5,-.5) edge[dashed] +(.5,.5) edge[dashed] +(.5,.2) edge[dashed] +(.5,-.2) edge[dashed] +(.2,-.5);
+        \draw [decorate,decoration={brace,amplitude=5pt,mirror}]
+        (-.7,.5) -- (-.7,-.5) node[midway,xshift=-1em]{$A$};
+        \draw [decorate,decoration={brace,amplitude=5pt}]
+        (1.1,.5) -- (1.1,-.5) node[midway,xshift=1em]{$A'$};
+    \end{tikzpicture}
+    =0
+\]
+
+\[
+    \text{3a) and 4ab):  }
+    \begin{tikzpicture}
+        \node[ext] (v) at (0,0) {};
+        \node at (-.62, .1) {$\scriptscriptstyle \vdots$};
+        \node[int] (w) at (.8, 0) {};
+        \node (s) at (1.5,.4) {\tiny$s$};
+        \node (t) at (1.5,-.4) {\tiny$t$};
+        \draw (v) edge[->-] +(-.6,-.5) edge[->-] +(-.6,-.3) edge[->-] +(-.3,-.5)
+        edge[->-] +(-.6,.5) edge[->-] +(-.6,.3) edge[->-] +(-.3,.5) 
+        edge[dashed] +(.6,.5) edge[dashed] +(.6,+.3)  edge[dashed] +(.3,+.5)
+        edge[dashed] +(.6,-.5) edge[dashed] +(.6,-.3) edge[dashed] +(.3,-.5) edge[crossed] (w);
+        \draw (w)  to [out=35,in=-35,distance=1cm] (w) edge[dashed] +(.6,+.5)  edge +(.3,+.5)
+        edge[dashed] +(.6,-.5) edge[dashed] +(.3,-.5);
+        \draw [decorate,decoration={brace,amplitude=5pt,mirror}]
+        (-.8,.5) -- (-.8,-.5) node[midway,xshift=-1em]{$B$};
+        \draw [decorate,decoration={brace,amplitude=5pt}]
+        (1.6,.5) -- (1.6,-.5) node[midway,xshift=1em]{$A^c$};
+        \draw [decorate,decoration={brace,mirror,amplitude=5pt}]
+        (-.7,-.6) -- (.7,-.6) node[midway,yshift=-0.8em]{\small $A$};
+    \end{tikzpicture}
+    =0
+    \hspace{0.8cm}
+    \begin{tikzpicture}
+        \node[ext] (v) at (0,0) {};
+        \node at (-.62, .1) {$\scriptscriptstyle \vdots$};
+        \node[int] (w) at (.8, 0) {};
+        \node (s) at (1.2,.4) {\tiny$s$};
+        \node (t) at (1.2,-.4) {\tiny$t$};
+        \draw (v) edge[->-] +(-.6,-.5) edge[->-] +(-.6,-.3) edge[->-] +(-.3,-.5)
+        edge[->-] +(-.6,.5) edge[->-] +(-.6,.3) edge[->-] +(-.3,.5) 
+        edge[dashed] +(.6,.5) edge[dashed] +(.6,+.3)  edge[dashed] +(.3,+.5)
+        edge[dashed] +(.6,-.5) edge[dashed] +(.6,-.3) edge[dashed] +(.3,-.5) edge[crossed] (w);
+        \draw (w)  to [out=35,in=-35,distance=1cm] (w);
+        \draw [decorate,decoration={brace,amplitude=5pt,mirror}]
+        (-.8,.5) -- (-.8,-.5) node[midway,xshift=-1em]{$B$};
+        \draw [decorate,decoration={brace,mirror,amplitude=5pt}]
+        (-.7,-.6) -- (.7,-.6) node[midway,xshift=-.3em,yshift=-0.8em]{\small $A$};
+        \node at (1.2,-1) {\tiny $A^c=\{s,t\}$};
+    \end{tikzpicture}
+    =
+    \frac{1}{12}
+    \begin{tikzpicture}
+        \node[ext] (v) at (0,0) {};
+        \node at (-.62, .1) {$\scriptscriptstyle \vdots$};
+        \node[int] (w) at (.8, 0) {};
+        \node at (.6,-.25) {\tiny$p$};
+        \node at (.4,-1) {\small$\omega_{B\sqcup p}\otimes\delta_{irr}$};
+        \draw (v) edge[->-] +(-.6,-.5) edge[->-] +(-.6,-.3) edge[->-] +(-.3,-.5)
+        edge[->-] +(-.6,.5) edge[->-] +(-.6,.3) edge[->-] +(-.3,.5) 
+        edge[dashed] +(.6,.5) edge[dashed] +(.6,+.3)  edge[dashed] +(.3,+.5)
+        edge[dashed] +(.6,-.5) edge[dashed] +(.6,-.3) edge[dashed] +(.3,-.5) edge[->-] (w);
+        \draw (w) edge[crossed, out=35,in=-35,distance=1cm] (w);
+        \draw [decorate,decoration={brace,amplitude=5pt,mirror}]
+        (-.8,.5) -- (-.8,-.5) node[midway,xshift=-1em]{$B$};
+    \end{tikzpicture}
+\]
+
+With condition $1)$ and relations $3a),4b), 4ab)$ we can consider only the generators whose graphical depiction has no loops except possibly at $\bar{v}$, but including the special case of exactly one loop at $\tilde{v}$ for the case $(B)$ with $\omega_B\otimes \delta_{irr}$.
+
+Considering now the graphical depictions, we obtain four families of $(g,n)$-stable graphs with features, which we call $A_3,A_2,B_1$ and $B_{irr}$. We will denote graphs with features in these families as $G_{\bar{v},B\subseteq A}^{\tilde{v}}$, $G_{\bar{v},B}^{\tilde{v},\{A,A'\}}$, $G_{\bar{v},B}^{\tilde{v},irr}$ respectively. The variables range in each case over the following objects:
+\begin{enumerate}
+    \item[all:\, ] Any $(g,n)$-stable graph $G$ with exactly one genus $1$ vertex $\bar{v}$ and every other vertex having genus $0$.
+    \item[$A_3,A_2$: ] Any choice of a crossed internal edge ($\bar{v},\tilde{v}$) adjacent to $\bar{v}$. In this case, with $N_{\bar{v}}$ we will always mean the hairs and half-edges adjacent to $\bar{v}$ or to $\tilde{v}$ excluding the two crossed half-edges, and we fix a canonical ordering of the set $N_{\bar{v}}$. In addition, there's any choice of subsets $B\subseteq A\subseteq N_{\bar{v}}$ with $|B|=10$ and either $|A^c|\geq 3$ or $|A^c|=2$, called $A_3$ and $A_2$ cases respectively. $G$ is required to be simple, except possibly with loops at $\bar{v}$ or multiple edges parallel to the crossed edge. In case $A_2$, $G$ is also allowed to have one loop at $\tilde{v}$.
+    \item[$B_1,B_{irr}$: ] Any choice of subset $B\subseteq N_{\bar{v}}$ with $|B|=11$.  We fix a canonical ordering on $N_{\bar{v}}$.
+    \item[$B_1$:] Any choice of a crossed internal edge $\tilde{v}=(\tilde{v}_1,\tilde{v}_2)$ not adjacent to $\bar{v}$ and any partition $A\sqcup A'=N_{\tilde{v}}$ with $|A|,|A'|\geq 2$; in this case we denote by $N_{\tilde{v}}$ the hairs and half-edges adjacent to $\tilde{v}_1$ or $\tilde{v}_2$ excluding the two crossed half-edges. $G$ is required to be simple, except possibly with loops at $\bar{v}$ or multiple edges parallel to the crossed edge.
+    \item[$B_{irr}$:] $G$ is required to be simple, except possibly with loops at $\bar{v}$, and with exactly one vertex $\tilde{v}\neq\bar{v}$ with unique neighbour $\bar{v}$ and one loop, which we call the crossed edge.
+    \item[all:\,] A choice of alternating order of the internal edges of $G$ which are not crossed.
+    \item[all:\,] The resulting graph with features must have no odd symmetries. Here a symmetry is a graph automorphism that preserves all the choices made above.
+\end{enumerate}
+
+The only relations amongst these four families of generators are the relations of the cohomology classes $Z_{B\subseteq A}$ in case $A_2$ and $\omega_B$ in case $B_1,B_{irr}$ and the remaining quotient relation 3b) in case $B_1$, which can be seen as just an extension of the weight $2$ relations in case $B_1$. Using these four families of generators, we obtain
+\begin{multline}
+    \; \bGK^{12,1}_{g,n} = \;\;
+    \bigoplus_{\left[\substack{G,\bar{v},\tilde{v} \\ B,A,|A^c|\geq 3} \right]} \left< G_{\bar{v},B\subseteq A}^{\tilde{v}} \right>
+    \oplus \bigg( \bigoplus_{\left[\substack{G,\bar{v},\tilde{v} \\ B,A,|A^c|=2 }\right]} \left< G_{\bar{v},B\subseteq A}^{\tilde{v}} \right> \bigg) \bigg/ \{\substack{\text{weight 13}\\ \text{relations}}\} \\
+    \oplus \bigg( \bigoplus_{\left[\substack{G,\bar{v},\tilde{v} \\ B, A}\right]} \left<G_{\bar{v},B}^{\tilde{v},\{A,A'\}} \right> \bigg) \bigg/ \{\substack{\text{weight 11, 2, and}\\ \text{$3b)$ relations}}\}
+    \oplus \bigg( \bigoplus_{\left[G,\bar{v},\tilde{v},B\right]} \left< G_{\bar{v},B}^{\tilde{v},irr} \right> \bigg) \bigg/ \{\substack{\text{weight 11}\\ \text{relations}}\},
+\end{multline}
+where the square brackets indicate that we range over all the admissible choices listed above, up to isomorphisms of graphs with features.
+
+For example, because of weight $13$ relations and relation $4ab)$, any $A_2$ generator with a second edge parallel to the crossed edge with one end in the set $B$ is identified with a multiple of a $B_{irr}$ generator \cite[Remark 2.5]{CLPW2}.
+
+
+\subsection{Blow up representation of the generators}
+In order to determine $\bGK_{g,n}^{12,1}$ we need to classify the four families of graphs with features above up to isomorphism. To this end, we look at their connected components after deleting the special vertex but keeping it's half-edges and hairs; this is called the blow up representation. We keep track of the features at the special vertex by labeling the hairs of the blow up components either $\epsilon$ or $\omega$; in each case there are precisely $11$ $\omega$ labels. In the pictures below, one has to imagine  the rest of the ambient graph to exist unchanged, potentially grouping the $\epsilon$ and $\omega$ hairs into connected components.
+
+\begin{multline}
+    \hspace{.5cm} G_{\bar{v},B}^{\tilde{v},\{A,A'\}},G_{\bar{v},B}^{\tilde{v},irr} 
+     \mapsto G_{\bar{v},B}^{\tilde{v},\{A,A'\}},G_{\bar{v},B}^{\tilde{v},irr}  \setminus \bar{v} \hspace{3cm}
+     G_{\bar{v},B\subseteq A}^{\tilde{v}} \hspace{.5cm} \mapsto \hspace{.5cm} G_{\bar{v},B\subseteq A}^{\tilde{v}}\setminus \bar{v}
+    \\\hspace{-0.5cm}
+    \begin{tikzpicture}
+        \node[ext] (v) at (0,0) {};
+        \node at (-.62, .1) {$\scriptscriptstyle \vdots$};
+        \draw (v) edge[->-] +(-.6,-.5) edge[->-] +(-.6,-.3) edge[->-] +(-.3,-.5)
+        edge[->-] +(-.6,.5) edge[->-] +(-.6,.3) edge[->-] +(-.3,.5) 
+        edge[dashed] +(.6,.5) edge[dashed] +(.6,+.3)  edge[dashed] +(.3,+.5)
+        edge[dashed] +(.6,-.5) edge[dashed] +(.6,-.3) edge[dashed] +(.3,-.5) ;
+        \draw [decorate,decoration={brace,amplitude=5pt,mirror}]
+      (-.8,.5) -- (-.8,-.5) node[midway,xshift=-1em]{$B$};
+        \draw [decorate,decoration={brace,amplitude=5pt}]
+        (.7,.5) -- (.7,-.5) node[midway,xshift=1em]{$B^c$};
+    \end{tikzpicture}
+    \mapsto
+    \begin{tikzpicture}
+        \node (e1) at (-1.5,-.5) {$\epsilon$};
+        \node at (-1,-.5) {$\dots$};
+        \node (e2) at (-.5,-.5) {$\epsilon$};
+        \node (w1) at (0,-.5) {$\omega$};
+        \node at (0.5,-.5) {$\dots$};
+        \node (w2) at (1,-.5) {$\omega$};
+        \draw (e1) edge[dashed] +(0,1) (e2) edge[dashed] +(0,1);
+        \draw (w1) edge +(0,1) (w2) edge +(0,1);
+        \draw [decorate,decoration={brace,mirror,amplitude=5pt}]
+        (-1.5,-.7) -- (-.3,-.7) node[midway,yshift=-0.8em]{\tiny $B^c$};
+        \draw [decorate,decoration={brace,mirror,amplitude=5pt}]
+        (-.2,-.7) -- (1.2,-.7) node[midway,yshift=-0.8em]{\tiny $B$};
+    \end{tikzpicture}
+    \hspace{1cm}
+    \begin{tikzpicture}
+        \node[ext] (v) at (0,0) {};
+        \node at (-.62, .1) {$\scriptscriptstyle \vdots$};
+        \node[int] (w) at (.8, 0) {};
+        \draw (v) edge[->-] +(-.6,-.5) edge[->-] +(-.6,-.3) edge[->-] +(-.3,-.5)
+        edge[->-] +(-.6,.5) edge[->-] +(-.6,.3) edge[->-] +(-.3,.5) 
+        edge[dashed] +(.6,.5) edge[dashed] +(.6,+.3)  edge[dashed] +(.3,+.5)
+        edge[dashed] +(.6,-.5) edge[dashed] +(.6,-.3) edge[dashed] +(.3,-.5) edge[crossed] (w);
+        \draw (w) edge +(.6,.5) edge[dashed] +(.6,+.3)  edge[dashed] +(.3,+.5)
+        edge +(.6,-.5) edge[dashed] +(.6,-.3) edge[dashed] +(.3,-.5);
+        \draw [decorate,decoration={brace,amplitude=5pt,mirror}]
+        (-.8,.5) -- (-.8,-.5) node[midway,xshift=-1em]{$B$};
+        \draw [decorate,decoration={brace,amplitude=5pt}]
+        (1.5,.5) -- (1.5,-.5) node[midway,xshift=1em]{$A^c$};
+        \draw [decorate,decoration={brace,mirror,amplitude=5pt}]
+        (-.7,-.6) -- (.7,-.6) node[midway,yshift=-0.8em]{\small $A$};
+    \end{tikzpicture}
+    \mapsto
+    \begin{tikzpicture}
+        \node (e1) at (-1.5,-.5) {$\epsilon$};
+        \node at (-1,-.5) {$\dots$};
+        \node (e2) at (-.5,-.5) {$\epsilon$};
+        \node (w1) at (0,-.5) {$\omega$};
+        \node at (0.5,-.5) {$\dots$};
+        \node (w2) at (1,-.5) {$\omega$};
+        \node (w_) at (1.5,-.5) {$\omega$};
+        \node[int] (v) at (1.5,.5) {};
+        \draw (e1) edge[dashed] +(0,1) (e2) edge[dashed] +(0,1);
+        \draw (w1) edge +(0,1) (w2) edge +(0,1);
+        \draw (w_) edge[crossed] (v);
+        \draw (v) edge +(.5,.5)  edge[dashed] +(.5,.2) edge[dashed] +(.2,.5);
+        \draw (v) edge +(-.5,.5) edge[dashed] +(-.5,.2) edge[dashed] +(-.2,.5);
+        \draw [decorate,decoration={brace,mirror,amplitude=5pt}]
+        (-1.5,-.7) -- (-.3,-.7) node[midway,yshift=-0.8em]{\tiny $A\setminus B$};
+        \draw [decorate,decoration={brace,mirror,amplitude=5pt}]
+        (-.2,-.7) -- (1.2,-.7) node[midway,yshift=-0.8em]{\tiny $B$};
+        \draw [decorate,decoration={brace,mirror,amplitude=5pt}]
+        (2,.5) -- (2,1.1) node[midway,xshift=1em]{\small $A^c$};
+    \end{tikzpicture}
+\end{multline}
+The crucial observation is that, if $C_1,..,C_k$ are the blow up components of $G$, graph automorphisms $\phi:G\rightarrow G$ fixing $\bar{v}$ precisely correlate to permutations $\sigma\in\ss_k$ and graph isomorphisms $\phi_i:C_i\rightarrow C_{\sigma(i)}$. Thus, a generator $G$ is uniquely determined by its list of blow components up to reordering and isomorphism of the components preserving the features $\epsilon,\omega$, the original $n$ hairs and the crossed edge. In addition, a generator has an odd symmetry if and only if it has either a blow up component with an odd symmetry (when restricted to internal edges and $\epsilon$ hairs, as the sign on $\omega$ cancels out by the action on the cohomology class) or at least two isomorphic blow up components wich have an odd number of internal edges plus $\epsilon$ hairs (as the action on $\omega$ hairs cancels out).
+
+This is already a concrete description that could be implemented in a computer algebra system. However, it would be very computationally wasteful to generate for each $(g,n)$ all isomorphism classes of $(g,n)$-stable graphs because the most efficient graph generating algorithms run based on the number of vertices.
+
+Notice that the $(g,n)$ type of a graph $G$ can be be computed from the $(g,n)$ type and the number of $\epsilon$ and $\omega$ labels of each blow up component. This means that we could first classify a set of blow up components based on these parameters and afterwards generate all blow up representations with these components. If we knew that the blow up of every graph in some $(g,n)$ classes is so representable we would obtain the full $\bGK_{g,n}^{12,1}$ for multiple $(g,n)$ at a time, thus minimizing computational redundancy.
+
+The authors of \cite[Section 3.2]{CLPW2} have chosen to classify blow up representations by their excess value $E(g,n) = 3(g-1)+2n-22$, which fits together as follows with the parameters of blow up components:
+\[ n_{\bar{v}} = \sum_i\epsilon_i+\omega_i \geq 11 \hspace{1cm} n = \sum_i n_i \hspace{1cm} g = 1+\sum_i(g_i+\epsilon_i+\omega_i-1) \]
+\[ 2(g-1)+n = n_{\bar{v}}+\sum_i 2(g_i-1)+\epsilon_i+\omega_i+n_i \hspace{1.5cm}  \forall i: 3(g_i-1)+3\epsilon_i+\omega_i+2n_i \geq 0\]
+\[ 3(g-1)+2n = n_{\bar{v}}+\sum_i 3(g_i-1)+2(\epsilon_i+\omega_i+n_i) = 22+\sum_i 3(g_i-1)+3\epsilon_i+\omega_i+2n_i,
+\]
+where $g_i,\epsilon_i,\omega_i,n_i$ are the genus, number of $\epsilon$ labels, number of $\omega$ labels and number of original hairs of the $i$-th blow up component. $E$ is non-negative and additive over the paramenter $e(C_i)=3(g_i-1)+3\epsilon_i+\omega_i+2n_i$ of blow up components, meaning that excess $E$ graphs can only be obtained from a list of blow up components with $e$ summing up to $E$.
+
+One reason for considering this function as a measure of complexity is its invariance under replacing three hairs at the special vertex by a 'tripod', meaning that in the excess classification we deal simultaneously with every combination of these two types of graphs, which are arguably the simplest stable subgraphs connected to the special vertex.
+\[
+\begin{tikzpicture}
+    \node (w1) at (0,-.5) {$\omega$};
+    \node (w2) at (.5,-.5) {$\omega$};
+    \node (w3) at (1,-.5) {$\omega$};
+    \node (w4) at (1.5,-.5) {$\omega$};
+    \node (w5) at (2,-.5) {$\omega$};
+    \node (w6) at (2.5,-.5) {$\omega$};
+    \node (w7) at (3,-.5) {$\omega$};
+    \draw (w1) edge +(0,1) (w2) edge +(0,1)  (w3) edge +(0,1)  (w4) edge +(0,1)  (w5) edge +(0,1)  (w6) edge +(0,1)  (w7) edge +(0,1);
+\end{tikzpicture}
+,
+\begin{tikzpicture}
+    \node[int] (v) at (.5,.5) {};
+    \node (w1) at (0,-.5) {$\omega$};
+    \node (w2) at (.5,-.5) {$\omega$};
+    \node (w3) at (1,-.5) {$\omega$};
+    \node (w4) at (1.5,-.5) {$\omega$};
+    \node (w5) at (2,-.5) {$\omega$};
+    \node (w6) at (2.5,-.5) {$\omega$};
+    \node (w7) at (3,-.5) {$\omega$};
+    \draw (w1) edge (v) (w2) edge (v)  (w3) edge (v)  (w4) edge +(0,1)  (w5) edge +(0,1)  (w6) edge +(0,1)  (w7) edge +(0,1);
+\end{tikzpicture}
+,
+\begin{tikzpicture}
+    \node[int] (v) at (.5,.5) {};
+    \node[int] (v2) at (2,.5) {};
+    \node (w1) at (0,-.5) {$\omega$};
+    \node (w2) at (.5,-.5) {$\omega$};
+    \node (w3) at (1,-.5) {$\omega$};
+    \node (w4) at (1.5,-.5) {$\omega$};
+    \node (w5) at (2,-.5) {$\omega$};
+    \node (w6) at (2.5,-.5) {$\omega$};
+    \node (w7) at (3,-.5) {$\omega$};
+    \draw (w1) edge (v) (w2) edge (v)  (w3) edge (v)  (w4) edge (v2)  (w5) edge (v2)  (w6) edge (v2) (w7) edge +(0,1);
+\end{tikzpicture}
+  \text{ \;have $3(g-1)+2n=14$}
+\]
+
+\subsection{Action of the differential on the generators}
+In the simplified graph complex $\bGK^{12,1}_{g,n}$, the differential $d$ acts by summing over every vertex and every way of splitting that vertex \cite[Section 2.6]{CLPW2}. More precisely, for every vertex $v$ of a decorated graph $(\Gamma,\gamma\otimes o)$ we consider the one-vertex decorated graph $(*_v,\gamma_v)$ whose hairs correspond to the hairs and neighbours of $v$ in $\Gamma$. The differential on one-vertex graphs decorated by the relevant cohomology classes is described in \ref{sec:1differential}. We denote by $d_v(\Gamma,\gamma\otimes o)$ the decorated graph obtained by replacing the vertex $v$ and it's decoration $\gamma_v$ by $d(*_{g,n},\gamma_v)$, gluing it's hairs to the hairs and neighbours of $v$ in $\Gamma$; the newly created edge is understood to be placed last in the alternating ordering $o$. Thus, the total differential takes the form
+
+
+\[ \text{case (A): } (\Gamma,\gamma\otimes o) \xlongrightarrow{d} \hspace{.3cm} d_{\bar{v}}(\Gamma,\gamma\otimes o) \hspace{.1cm}  + d_{\tilde{v}}(\Gamma,\gamma\otimes o) +\sum_{\bar{v},\tilde{v}\neq v\in V(G)} d_v(\Gamma,\gamma\otimes o) \]
+\[ \text{case (A): } (\Gamma,\gamma\otimes o) \xlongrightarrow{d} \hspace{.3cm} d_{\bar{v}}(\Gamma,\gamma\otimes o) \hspace{.1cm}  + d_{\tilde{v}}(\Gamma,\gamma\otimes o) +\sum_{\bar{v},\tilde{v}\neq v\in V(G)} d_v(\Gamma,\gamma\otimes o) \]
+
+On graphical depictions
+The differentials outside of the special vertex can be computed at the blow up component level, whereas at the special vertex in general it depends on the whole list of blow up components.
