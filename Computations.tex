@@ -1,0 +1,260 @@
+\section{Computer program}
+
+
+\newcommand{\myB}{\bGK^{12,1}}
+
+We use Python to generate all possible blown-up representations of the relevant decorated graphs with a certain upper excess bound $E_{max}$. The script is in the format of a Jupyter Notebook. The graphs are generated using Sage's builtin interface for the Nauty library, and are later wrapped in Python objects that make available the graph features for easy access. We use Pandas to store the large amounts of python objects in dataframes along with many of their parameters (excess, edges, etc), which enables the user to take advantege of many useful data management tools like querying, sorting and grouping. Finally, we use Matplotlib to either show the graphs in the output cells or save them in a pdf file.
+
+\subsection{Generate blown-up components} These are all the connected graphs with trivalent vertices, hairs labeled by $\epsilon,\omega$ or $j$ such that $0\leq 3(g-1)+3|\epsilon|+|\omega|+2|j| \leq E_{max}-22$, and falling under exactly one of the following cases:
+\begin{enumerate}
+    \item simple,
+    \item simple and with a crossed $\omega$ hair,
+    \item simple and with a crossed internal edge, possibly having maximum one multiple edge parallel to the crossed edge.
+\end{enumerate}
+
+We also add manually the following seven bonus graphs:
+\[
+    \begin{tikzpicture}
+        \node (v) at (0,0) {$\omega$};
+        \node (w) at (1,0) {$\omega$};
+        \draw (v) edge[bend left=60, distance=.5cm] (w); 
+    \end{tikzpicture}
+    \hspace{0.4cm}
+    \begin{tikzpicture}
+        \node (v) at (0,0) {$\omega$};
+        \node (w) at (1,0) {$\epsilon$};
+        \draw (v) edge[bend left=60, distance=.5cm] (w); 
+    \end{tikzpicture}
+    \hspace{0.4cm}
+    \begin{tikzpicture}
+        \node (v) at (0,0) {$\epsilon$};
+        \node (w) at (1,0) {$\epsilon$};
+        \draw (v) edge[bend left=60, distance=.5cm] (w); 
+    \end{tikzpicture}
+    \hspace{0.4cm}
+    \begin{tikzpicture}
+        \node (w1) at (0,0) {$\omega$};
+        \node (n) at (0,1.2) {$j$};
+        \draw (w1) edge (n); 
+    \end{tikzpicture}
+    \hspace{0.4cm}
+    \begin{tikzpicture}
+        \node (w1) at (0,0) {$\epsilon$};
+        \node (n) at (0,1.2) {$j$};
+        \draw (w1) edge (n); 
+    \end{tikzpicture}
+    \hspace{0.4cm}
+    \begin{tikzpicture}
+        \node (w) at (0,0) {$\omega$};
+        \node[int] (v) at (0,.8) {};
+        \draw (w) edge (v);
+        \draw (v) edge +(0,-.3) edge[loop, crossed, distance=0.8cm] (v);
+    \end{tikzpicture}
+    \hspace{0.4cm}
+    \begin{tikzpicture}
+        \node (w) at (0,0) {$\epsilon$};
+        \node[int] (v) at (0,.8) {};
+        \draw (w) edge (v) (v) edge[loop, crossed, distance=0.8cm] (v);
+    \end{tikzpicture}
+\]
+
+In this list lie also many graphs that will successively killed by relations, for example the lone hair with two $\omega$ labels, $A_2$ graphs with a loop at $\tilde{v}$ or a a second $\omega$ hair incident to the crossed hair. Nonetheless, it is useful to have all these graphs in the list for completeness, and verifying that the algorithms run correctly in full generality.
+
+First we generate graphs where $\epsilon$ and $\omega$ hairs are unlabeled, so called \textit{unmarked blown-up components}, and then we mark them in every possible way. This is done in order to determine weight 11 relations later on, as explained below.
+
+These graphs are wrapped in Python objects which compute at construction all graph parameters such as genus, valence at the special vertices, odd symmetries, Specht module contributions and plotting structures.
+
+\subsection{Weight 2 and $3b)$ relations} Case $B_1$ graphs are grouped by the isomorphism class of their contraction at the crossed edge.
+This yields groups of blown-up components such that, any weight 2 cohomology relations or the $3b)$ relation restrict between graphs in the same group. In low excess, for most $B_1$ graphs the valence at $\tilde{v}$ is the minimal amount $4$, and thus one can automatically pick any graph in the group to get a basis. But for higher valence, we manually go through each weight 2 relation group, determine a basis and hardcode it directly into the script.
+
+In any case, a $B_1$ graph with a multiple edge and valence $4$ are equivalent to a $B_1$ graph with a loop, and thus vanish because of relation $3b)$. More generally, we note that if there exist two hairs or half-edges $s,t\in N_{\tilde{v}}$ in a graph $G_{\bar{v},B}^{\tilde{v},\{A,A'\}}$ with the property that it vanishes whenever the partitioin $A\sqcup A'$ doesn't separate $s$ and $t$, then, for every other $x,y\in N_{\tilde{v}}$ distinct from $s,z$, the following relation holds:
+\[  
+    \sum_{\substack{A\sqcup A'= N_{\tilde{v}}\\ s,x\in A, t,y\in A'}}
+    \begin{tikzpicture}
+        \node[int] (v) at (0,0) {};
+        \node[int] (w) at (0.5,0) {};
+        \node (s) at (-.1,.5)  {\tiny$s$};
+        \node (t) at (.6,.5)  {\tiny$t$};
+        \node (x) at (-.3,-.5) {\tiny$x$};
+        \node (y) at (.8,-.5) {\tiny$y$};
+        \draw (v) edge +(-.5,-.5) edge[dashed] +(-.5,.5) edge[dashed] +(-.5,.2) edge[dashed] +(-.5,-.2) edge[dashed] +(-.2,-.5) edge[crossed] (w) edge +(.1,.6)
+        (w) edge +(.5,-.5) edge[dashed] +(.5,.5) edge[dashed] +(.5,.2) edge[dashed] +(.5,-.2) edge[dashed] +(.2,-.5) edge +(-.1,.6);
+        \draw [decorate,decoration={brace,amplitude=5pt,mirror}]
+        (-.6,.5) -- (-.6,-.5) node[midway,xshift=-1em]{$A$};
+        \draw [decorate,decoration={brace,amplitude=5pt}]
+        (1,.5) -- (1,-.5) node[midway,xshift=1em]{$A'$};
+    \end{tikzpicture}
+    =
+    \sum_{\substack{A\sqcup A'= N_{\tilde{v}}\\ |A|,|A'|\geq 2 \\ x\in A, t,y\in A'}}
+    \begin{tikzpicture}
+        \node[int] (v) at (0,0) {};
+        \node[int] (w) at (0.5,0) {};
+        \node (t) at (.6,.5)  {\tiny$t$};
+        \node (x) at (-.3,-.5) {\tiny$x$};
+        \node (y) at (.8,-.5) {\tiny$y$};
+        \draw (v) edge +(-.5,-.5) edge[dashed] +(-.5,.5) edge[dashed] +(-.5,.2) edge[dashed] +(-.5,-.2) edge[dashed] +(-.2,-.5) edge[crossed] (w) edge +(.1,.6)
+        (w) edge +(.5,-.5) edge[dashed] +(.5,.5) edge[dashed] +(.5,.2) edge[dashed] +(.5,-.2) edge[dashed] +(.2,-.5) edge +(-.1,.6);
+        \draw [decorate,decoration={brace,amplitude=5pt,mirror}]
+        (-.6,.5) -- (-.6,-.5) node[midway,xshift=-1em]{$A$};
+        \draw [decorate,decoration={brace,amplitude=5pt}]
+        (1,.5) -- (1,-.5) node[midway,xshift=1em]{$A'$};
+    \end{tikzpicture}
+    =
+    \sum_{\substack{A\sqcup A'= N_{\tilde{v}}\\ |A|,|A'|\geq 2 \\ x\in A, t,s\in A'}}
+    \begin{tikzpicture}
+        \node[int] (v) at (0,0) {};
+        \node[int] (w) at (0.5,0) {};
+        \node (s) at (.6,.5)  {\tiny$s$};
+        \node (t) at (.4,.5)  {\tiny$t$};
+        \node (x) at (-.3,-.5) {\tiny$x$};
+        \draw (v) edge +(-.5,-.5) edge[dashed] +(-.5,.5) edge[dashed] +(-.5,.2) edge[dashed] +(-.5,-.2) edge[dashed] +(-.2,-.5) edge[crossed] (w)
+        (w) edge[dashed] +(.5,-.5) edge[dashed] +(.5,.5) edge[dashed] +(.5,.2) edge[dashed] +(.5,-.2) edge[dashed] +(.2,-.5) edge +(-.3,.6) edge +(.3,.6);
+        \draw [decorate,decoration={brace,amplitude=5pt,mirror}]
+        (-.6,.5) -- (-.6,-.5) node[midway,xshift=-1em]{$A$};
+        \draw [decorate,decoration={brace,amplitude=5pt}]
+        (1,.5) -- (1,-.5) node[midway,xshift=1em]{$A'$};
+    \end{tikzpicture}
+    =0  
+\]
+This observation can be employed to kill some graphs in excess 3 and 4 which have multiple edges or form a triangle:
+\[
+    3 \cdot
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (1,0) {};
+        \node (w1) at (-.25,-.9) {$\omega$};
+        \node (w2) at (.25,-.9) {$\omega$};
+        \node (w3) at (1,-.9) {$\omega$};
+        \draw (v1) edge[crossed] (v2) edge[bend left=40, distance=0.6cm] (v2) edge (w1) edge (w2) (v2) edge (w3);
+    \end{tikzpicture}
+    =0  \hspace{1cm}
+    3 \cdot
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (1,0) {};
+        \node[int] (v3) at (1.4,0) {};
+        \node (w1) at (0,-.9) {$\omega$};
+        \node (w2) at (.8,-.9) {$\omega$};
+        \node (w3) at (1.2,-.9) {$\omega$};
+        \node (w4) at (1.8,-.9) {$\omega$};
+        \draw (v1) edge[crossed] (v2) edge[bend left=40, distance=0.6cm] (v2) edge (w1);
+        \draw (v2) edge (w2) edge (v3);
+        \draw (v3) edge (w3) edge (w4);
+    \end{tikzpicture}
+    =0    \hspace{1cm}
+    3 \cdot
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (1,0) {};
+        \node[int] (v3) at (.5,.5) {};
+        \node (w1) at (-.25,-.9) {$\omega$};
+        \node (w2) at (.25,-.9) {$\omega$};
+        \node (w3) at (.9,-.7) {$\omega$};
+        \node (n) at (1.4,1) {$j$};
+        \draw (v1) edge[crossed] (v2) edge (v3) edge (w1) edge (w2);
+        \draw (v2) edge (v3) edge[bend right=30](n);
+        \draw (v3) edge (w3);
+    \end{tikzpicture}
+    =0
+\]
+
+
+
+The cohomological degree of the graphs $\Gamma^{(0)}_{irr}$ and $\Gamma^{(0)}_{\delta}$ above is $k=24-n$, while that of $\Gamma^{(0)}_{s}$ is $k=23-n$.
+Using \eqref{equ:split 13},
+one checks that the differential sends $\Gamma^{(0)}_{s}$ to a non-zero multiple of $\Gamma^{(0)}_{\delta}$ plus a multiple of $\Gamma^{(0)}_{irr}$. Note that of the six terms in \eqref{equ:split 13} only the the third and the fifth term contribute, with the third term producing a multiple of $\Gamma^{(0)}_{irr}$ (after using the relation \eqref{rel1}), and the fifth term producing $-\Gamma^{(0)}_{\delta}$ (after replacing the $\psi$ class with a boundary class). In particular, the first term in the second line of \eqref{equ:split 13} is zero in this case because there cannot be a weight 13 vertex of genus 1 and valence 11.
+In the end, we retain only one-dimensional cohomology, generated by $\Gamma^{(0)}_{irr}$. We hence obtain:
+\begin{align*}   H^k(\myB_{2,10}) &=
+    \begin{cases}
+        V_{1^{10}} & \text{for $k=14$} \\
+        0 & \text{otherwise}
+    \end{cases}
+&
+H^k(\myB_{4,7}) &=
+    \begin{cases}
+        % V_{1^{7}}\oplus 
+        V_{1^{7}} & \text{for $k=17$} \\
+        0 & \text{otherwise}
+    \end{cases}
+\\
+H^k(\myB_{6,4}) &=
+\begin{cases}
+    % V_{1^4} \oplus 
+    V_{1^{4}} & \text{for $k=20$} \\
+    0 & \text{otherwise}
+\end{cases}     
+&
+H^k(\myB_{8,1}) &=
+\begin{cases}
+    % V_{1} \oplus 
+    V_1 & \text{for $k=23$} \\
+    0 & \text{otherwise.}
+\end{cases}  
+\end{align*}
+
+
+
+We can now compute the cohomology of $\myB_{g,n}$ for $3g+2n=27$. The complex is concentrated in degrees $23-n$, $24-n$, $25-n$. Note that some generators exist only for higher genus or higher $n$. There is no cocycle of degree $23-n$, since the image of the differential is of full dimension. This is seen already by looking only at the leading terms $\Gamma_{b\bar 4}^{(2)}$, $\Gamma_{\epsilon \bar b}^{(2)}$, $\Gamma_{\bar B'}^{(2)}$.
+Note that these generators only exist for $g$ large enough, i.e., $g\geq 4$ or $g\geq 7$ respectively. But if they do not (because $g$ is too small), the same holds for the corresponding generators of degree $23-n$.
+Hence we conclude that $H^{23-n}(\myB_{g,n})=0$ for all $g,n$ considered.
+
+Next we consider cocycles $x$ of degree $24-n$.
+The general cocycle is a linear combination of the $9$ generators in degree $24-n$. By adding an exact term to $x$ we may however assume that this linear combination does not involve $\Gamma_{b\bar 4}^{(2)}$, $\Gamma_{\epsilon \bar b}^{(2)}$, $\Gamma_{\bar B'}^{(2)}$.
+Assume first that $n\geq 1$. Then we claim that no linear combination of the remaining generators can be closed. This is so because the image of the generators under the differential is already of full rank if projected to the subspace spanned by the ``leading terms" $\Gamma_{birr}^{(2)}$, $\Gamma_{b\bar b}^{(2)}$,
+$\Gamma_{j\bar b}^{(2)}$,
+$\Gamma_{j,irr}^{(2)}$,
+$\Gamma_{\bar b\bar b}^{(2)}$,
+$\Gamma_{\bar bi}^{(2)}$.
+Hence we have $H^{24-n}(\myB_{g,n})=0$ for $n\geq 1$.
+In the special case $n=0$, i.e., $g=9$, the generator $\Gamma_{j,irr}^{(2)}$ of degree $25$ does not exist, while $\Gamma_{\epsilon,irr}^{(2)}$ does exist.
+Hence a linear combination of $\Gamma_{\epsilon,irr}^{(2)}$ and $\Gamma_{4irr}^{(2)}$ is a cocycle, so that $H^{24}(\myB_{9,0})$ is one-dimensional.
+
+Finally, we consider degree $25-n$. 
+Any element $x$ of that degree is a cocyle. 
+By adding exact terms we may ensure that $x$ does not involve the generators 
+$\Gamma_{birr}^{(2)}$,
+$\Gamma_{b\bar b}^{(2)}$,
+$\Gamma_{j\bar b}^{(2)}$,
+$\Gamma_{\bar b\bar b}^{(2)}$,
+$\Gamma_{\bar bi}^{(2)}$,
+and in addition we have to mod out the linear combination $\sum_j\pm \Gamma_{j,irr}^{(2)}$ (for $g>1$, $n>0$), that accounts for one copy of the sign representation $V_{1^n}$ of $\ss_n$.
+Our $x$ can hence be a linear combination of the generators $\Gamma_i^{(2)}$,
+$\Gamma_{j,irr}^{(2)}$ and $\Gamma_{ij}^{(2)}$.
+The generators $\Gamma_i^{(2)}$ exist for $g\geq 3$ and $n\geq 1$ and contribute the representation $V_{1^n} \oplus V_{21^{n-2}}$ of $\bbS_n$.
+As explained above the generators $\Gamma_{j,irr}^{(2)}$ and $\Gamma_{ij}^{(2)}$ in total contribute an $\ss_n$ representation $V_{21^{n-2}}$ if $g=1$, and a representation $V_{1^n}\oplus V_{21^{n-2}}$ for $g>1$, $n>0$. As mentioned above, in the case $g>1$ we have to remove the $V_{1^n}$ again (since it is in the image of the differential).
+Hence we arrive at the following cohomology table:
+
+\begin{align*}
+  H^k(\myB_{1,12}) &=
+  \begin{cases}
+      V_{21^{10}} & \text{for $k=13$} \\
+      0 & \text{otherwise}
+  \end{cases}
+  &
+  H^k(\myB_{3,9}) &=
+  \scalebox{.95}{$\begin{cases}
+      V_{1^{9}}\oplus V_{21^7}\oplus V_{21^7} & \text{for $k=16$} \\
+      0 & \text{otherwise}
+  \end{cases}$
+  }
+  \\
+  H^k(\myB_{5,6}) &=
+  \begin{cases}
+    V_{1^{6}}\oplus V_{21^4}\oplus V_{21^4} & \text{for $k=19$} \!\! \\
+    0 & \text{otherwise}
+\end{cases}
+  &
+  H^k(\myB_{7,3}) &=
+  \begin{cases}
+    V_{1^{3}}\oplus V_{21}\oplus V_{21} & \text{for $k=22$} \\
+    0 & \text{otherwise}
+\end{cases}
+  \\
+  H^k(\myB_{9,0}) &=
+  \begin{cases}
+    \mathbb C & \text{for $k=24$} \\
+    0 & \text{otherwise.}
+  \end{cases}
+ \end{align*}
+
+\noindent This completes the proof of Theorem~\ref{thm:lowexc13}.
