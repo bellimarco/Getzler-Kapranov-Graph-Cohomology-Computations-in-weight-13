@@ -95,20 +95,11 @@ The two weight 11 relation groups with $12-n$ edges have basis (ID60, ID62) and 
 The two remaining weight 13 relation groups with $13-n$ edges have basis (ID38, ID35) and (ID39, ID37) respectively.\\
 The above holds for every $(g,n)$ pair, when the relevant graphs exist. The choices of these bases have been made a posteriori to suit well the gaussian elimination process.
 
-One checks that our choices of leading terms in the image of each graph under the differential are well-posed and indipendent from one another. After elimination, the only graphs remaining are ID26, ID32, ID122, ID67, ID35, ID45, ID71, ID127.
+One checks that our choices of leading terms in the differential of each graph are well-posed and indipendent from one another. Only the eight following graphs remain after elimination, distributed in the last two edge groups $12-n$ and $13-n$; we draw the matrix of the differential between these two degrees.
 
-\begin{tabular}{ c c|c|c|c|c|c|c|c|c }
-    \; & $\substack{ 12-n \\ \text{edges} }$
-    & \multicolumn{2}{c|}{ $\substack{ \text{ID26  n: 11, 8, 5, 2} \\
-        \begin{tikzpicture}
-            \node (w1) at (0,-.6) {\tiny$\omega$};
-            \node (w2) at (.5,-.6) {\tiny$\omega$};
-            \node[int] (v1) at (0.25,0) {};
-            \node (j1) at (0,.6) {\tiny$i$};
-            \node (j2) at (.5,.6) {\tiny$j$};
-            \draw (v1) edge[crossed](w1)edge(j1) edge(w2)edge(j2);
-        \end{tikzpicture}
-        }$ }
+\vspace{.5cm}
+\begin{tabular}{ c c|c|c|c|c|c|c }
+    & $12-n$ edges
     & \multicolumn{2}{c|}{ $\substack{ \text{ID32  n: 11, 8, 5, 2} \\
         \begin{tikzpicture}
             \node (w1) at (0,-.6) {\tiny$\omega$};
@@ -141,10 +132,22 @@ One checks that our choices of leading terms in the image of each graph under th
             \node[int] (vv) at (1.6,0) {};
             \draw (vv) edge(ww) edge[loop, crossed, distance=0.4cm] (vv);
         \end{tikzpicture}
-        }$ }  \\
-    $13-n$ edges &
-    & $V_{21^{n-2}}$ & $V_{31^{n-3}}$ & $V_{1^{n}}$ & $V_{21^{n-2}}$ & $V_{1^{n}}$ & $V_{21^{n-2}}$ & $V_{1^{n}}$ & $V_{21^{n-2}}$  \\ \hline
-    \multirow{5}{*}{$\substack{ \text{ID35 n: 11, 8, 5, 2 } \\
+        }$ }
+    % & \multicolumn{2}{c|}{ $\substack{ \text{ID26  n: 11, 8, 5, 2} \\
+    %     \begin{tikzpicture}
+    %         \node (w1) at (0,-.6) {\tiny$\omega$};
+    %         \node (w2) at (.5,-.6) {\tiny$\omega$};
+    %         \node[int] (v1) at (0.25,0) {};
+    %         \node (j1) at (0,.6) {\tiny$i$};
+    %         \node (j2) at (.5,.6) {\tiny$j$};
+    %         \draw (v1) edge[crossed](w1)edge(j1) edge(w2)edge(j2);
+    %     \end{tikzpicture}
+    %     }$ }
+    \\  $13-n$ edges  &
+    & $V_{1^{n}}$ & $V_{21^{n-2}}$ & $V_{1^{n}}$ & $V_{21^{n-2}}$ & $V_{1^{n}}$ & $V_{21^{n-2}}$ 
+    % & $V_{21^{n-2}}$ & $\substack{\text{\tiny$(n\geq 5)$\normalsize}\\ V_{31^{n-3}}}$
+    \\[.1cm] \hline
+    \multirow{5}{*}{$\substack{ \text{ID35  n: 11, 8, 5, 2 } \\
         \begin{tikzpicture}
             \node (w1) at (0,-.6) {\tiny$\omega$};
             \node (w2) at (.5,-.6) {\tiny$\omega$};
@@ -155,12 +158,12 @@ One checks that our choices of leading terms in the image of each graph under th
             \draw (v1) edge(v2) edge[crossed](w1)edge(j1) (v2)edge(w2)edge(j2);
         \end{tikzpicture}
         }$}
-    & $V_{1^{n}}$ & & & X & & & & & \\
-    & $V_{21^{n-2}}$ & & & & X & & & & \\
-    & $V_{221^{n-4}}$ & & & & & & & & \\
-    & $V_{21^{n-2}}$ & X & & & & & & & \\
-    & $V_{31^{n-3}}$ & & X & & & & & & \\ \hline
-    \multirow{2}{*}[-1mm]{$\substack{ \text{ID45 n: 11, 8, 5, 2 } \\
+    & $V_{1^{n}}$ & \cellcolor{lightgray} & &  & & & \\ \cline{2-8}
+    & $V_{21^{n-2}}$ & & \cellcolor{lightgray} & &  & & \\ \cline{2-8}
+    & \tiny$(n\geq 5)$\normalsize $V_{221^{n-4}}$ & & & & & & \\ \cline{2-8}
+    & \tiny$(n\geq 5)$\normalsize $V_{21^{n-2}}$ &  & & & & & \\ \cline{2-8}
+    & \tiny$(n\geq 5)$\normalsize $V_{31^{n-3}}$ & & & & & & \\ \hline
+    \multirow{2}{*}[-1mm]{$\substack{ \text{ID45  n: 11, 8, 5, 2 } \\
         \begin{tikzpicture}
             \node (w1) at (.25,-.6) {\tiny$\omega$};
             \node (w2) at (.75,-.6) {\tiny$\omega$};
@@ -171,9 +174,9 @@ One checks that our choices of leading terms in the image of each graph under th
             \draw (v1) edge(w1)edge(j1)edge(j2) (v2)edge(w2) edge[loop, crossed, distance=0.4cm] (v2);
         \end{tikzpicture}
         }$}
-    & $V_{21^{n-2}}$ & & & & & & & & \\[.7cm]
-    & $V_{31^{n-3}}$ & & & & & & & & \\[.7cm] \hline
-    \multirow{2}{*}[-1mm]{$\substack{ \text{ID127 n: 8, 5, 2 } \\
+    & $V_{21^{n-2}}$ & & & &  \cellcolor{lightgray} & & \\[.7cm] \cline{2-8}
+    & \tiny$(n\geq 5)$\normalsize $V_{31^{n-3}}$ & &  & & & & \\[.7cm] \hline
+    \multirow{2}{*}[-1mm]{$\substack{ \text{ID127  n: 8, 5, 2 } \\
         \begin{tikzpicture}
             \node (w1) at (0,-.6) {\tiny$\omega$};
             \node (w2) at (.4,-.6) {\tiny$\omega$};
@@ -190,24 +193,28 @@ One checks that our choices of leading terms in the image of each graph under th
             \draw (vv) edge(ww) edge[loop, crossed, distance=0.4cm] (vv);
         \end{tikzpicture}
         }$}
-    & $V_{21^{n-2}}$  & & & & & & & & \\[.7cm]
-    & $V_{31^{n-3}}$  & & & & & & & & \\[.7cm] \hline
-    \multirow{2}{*}[-1mm]{$\substack{ \text{ID45 n: 11, 8, 5, 2 } \\
-        \begin{tikzpicture}
-            \node (w1) at (0,-.6) {\tiny$\omega$};
-            \node (w2) at (.5,-.6) {\tiny$\omega$};
-            \node[int] (v1) at (0,0) {};
-            \node[int] (v2) at (.5,0) {};
-            \node (j1) at (0,.6) {\tiny$i$};
-            \node (j2) at (.5,.6) {\tiny$j$};
-            \draw (v1) edge[crossed](v2) edge[crossed](w1)edge(w2) (v2)edge(j1)edge(j2);
-        \end{tikzpicture}
-        }$}
-    & $V_{21^{n-2}}$ & & & & & & & & \\[.7cm]
-    & $V_{31^{n-3}}$ & & & & & & & & \\[.7cm]
+    & $V_{21^{n-2}}$  & & & & & &  \cellcolor{lightgray} \\[.7cm] \cline{2-8}
+    & \tiny$(n\geq 5)$\normalsize $V_{31^{n-3}}$  & & & & & & \\[.7cm]
+    % \hline
+    % \multirow{2}{*}[-1mm]{$\substack{ \text{ID45  n: 11, 8, 5, 2 } \\
+    %     \begin{tikzpicture}
+    %         \node (w1) at (0,-.6) {\tiny$\omega$};
+    %         \node (w2) at (.5,-.6) {\tiny$\omega$};
+    %         \node[int] (v1) at (0,0) {};
+    %         \node[int] (v2) at (.5,0) {};
+    %         \node (j1) at (0,.6) {\tiny$i$};
+    %         \node (j2) at (.5,.6) {\tiny$j$};
+    %         \draw (v1) edge[crossed](v2) edge(w1)edge(w2) (v2)edge(j1)edge(j2);
+    %     \end{tikzpicture}
+    %     }$}
+    % & $V_{21^{n-2}}$ & \cellcolor{lightgray} & & & & & & & \\[.7cm] \cline{2-10}
+    % & \tiny$(n\geq 5)$\normalsize $V_{31^{n-3}}$ & & \cellcolor{lightgray} & & & & & & \\[.7cm]
 \end{tabular}
+\vspace{.5cm}
 
-We obtain the following cohomology groups. In particular, they are no longer concentrated in top degree.
+A filled box in the above matrix means that the differential of the column has the row as a non-zero term. The graph in the second column actually has only one term in its differential, whereas the other two also have other terms, which have been removed through gaussian elimination.
+
+We obtain the following cohomology groups. In particular, they are no longer concentrated in top degree, and as in excess 2, the pair of maximal genus $(8,2)$ vanishes in top degree.
 
 \begin{align*}
     H^k(\myB_{2,11}) &=
@@ -233,8 +240,7 @@ We obtain the following cohomology groups. In particular, they are no longer con
     &
     H^k(\myB_{8,2}) &=
     \scalebox{.95}{$\begin{cases}
-      V_{1^{2}}^{\oplus 2} \oplus V_{2} & \text{for $k=23$} \\
-      V_{2} & \text{for $k=24$} \\
+      V_{1^{2}}^{\oplus 2} & \text{for $k=23$} \\
       0 & \text{otherwise}
     \end{cases}$}
 \end{align*}

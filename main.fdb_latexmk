@@ -1,5 +1,5 @@
 # Fdb version 4
-["bibtex main"] 0 "main.aux" "main.bbl" "main" 1745517165.90175 0
+["bibtex main"] 0 "main.aux" "main.bbl" "main" 1745528087.42825 0
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/amscls/amsplain.bst" 1513722769 25798 9b3546f2f237ee0ce4724eed95f954f4 ""
   "main.aux" 0 -1 0 "pdflatex"
   "refs.bib" 0 -1 0 ""
@@ -7,7 +7,7 @@
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1745517159.88631 "/Users/marcobelli/Documents/MATHEMATICS/Getzler-Kapranov-Graph-Cohomology-Computations-in-weight-13/main.tex" "main.pdf" "main" 1745517165.90207 0
+["pdflatex"] 1745528081.51788 "/Users/marcobelli/Documents/MATHEMATICS/Getzler-Kapranov-Graph-Cohomology-Computations-in-weight-13/main.tex" "main.pdf" "main" 1745528087.4286 0
   "/Users/marcobelli/Documents/MATHEMATICS/Getzler-Kapranov-Graph-Cohomology-Computations-in-weight-13/main.tex" 1745515699.88424 11751 4f8a0b17be969842dbd172a74a1d5e9e ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -309,12 +309,12 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1745340022 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1745339590 3345734 c885fa19812e7e53b7f95d9e1939f4fd ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "Computations.tex" 1745517159.41074 10703 fe6532c58511ae8aa7ed347b6b6fa3ed ""
+  "Computations.tex" 1745528074.7815 11544 3cc086b43dec24a9f8f826a36a33bb5d ""
   "ComputerProgram.tex" 1745499873.77761 30083 f84934d8ae92205e86f9b7d4eed183e2 ""
   "SimplifiedGraphComplex.tex" 1745419150.68322 32665 15c52a399633fce525b643e40bb950fa ""
-  "main.aux" 1745517165.27664 3774 8db98fd3f88be134243987dbd9e9ba5f "pdflatex"
+  "main.aux" 1745528086.80356 3774 09193a03fd4369fbb4a42043b66abc35 "pdflatex"
   "main.bbl" 1745314297.85996 1429 b17fda4032684588cd92c1da288fda3d "bibtex main"
-  "main.out" 1745517165.27794 3517 e0291a1468984046c8f4d22f6ce3ec68 "pdflatex"
+  "main.out" 1745528086.80486 3517 e0291a1468984046c8f4d22f6ce3ec68 "pdflatex"
   "main.tex" 1745515699.88424 11751 4f8a0b17be969842dbd172a74a1d5e9e ""
   (generated)
   "main.aux"
