@@ -1,0 +1,310 @@
+\section{Computer program}
+
+
+\newcommand{\myB}{\bGK^{12,1}}
+
+We use Python to generate all possible blown-up representations of the relevant decorated graphs with a certain upper excess bound $E_{max}$. The script is in the format of a Jupyter Notebook. The graphs are generated using Sage's builtin interface for the Nauty library, and are later wrapped in Python objects that make available the graph features for easy access. We use Pandas to store the large amounts of python objects in dataframes along with many of their parameters (excess, edges, etc), which enables the user to take advantege of many useful data management tools like querying, sorting and grouping. Finally, we use Matplotlib to either show the graphs in the output cells or save them in a pdf file.
+
+\subsection{Generate blown-up components} These are all the connected graphs with trivalent vertices, hairs labeled by $\epsilon,\omega$ or $j$ such that $0\leq 3(g-1)+3|\epsilon|+|\omega|+2|j| \leq E_{max}-22$, and falling under exactly one of the following cases:
+\begin{enumerate}
+    \item simple,
+    \item simple and with a crossed $\omega$ hair,
+    \item simple and with a crossed internal edge, possibly having maximum one multiple edge parallel to the crossed edge.
+\end{enumerate}
+
+We also add manually the following seven bonus graphs:
+\[
+    \begin{tikzpicture}
+        \node (v) at (0,0) {$\omega$};
+        \node (w) at (1,0) {$\omega$};
+        \draw (v) edge[bend left=60, distance=.5cm] (w); 
+    \end{tikzpicture}
+    \hspace{0.4cm}
+    \begin{tikzpicture}
+        \node (v) at (0,0) {$\omega$};
+        \node (w) at (1,0) {$\epsilon$};
+        \draw (v) edge[bend left=60, distance=.5cm] (w); 
+    \end{tikzpicture}
+    \hspace{0.4cm}
+    \begin{tikzpicture}
+        \node (v) at (0,0) {$\epsilon$};
+        \node (w) at (1,0) {$\epsilon$};
+        \draw (v) edge[bend left=60, distance=.5cm] (w); 
+    \end{tikzpicture}
+    \hspace{0.4cm}
+    \begin{tikzpicture}
+        \node (w1) at (0,0) {$\omega$};
+        \node (n) at (0,1.2) {$j$};
+        \draw (w1) edge (n); 
+    \end{tikzpicture}
+    \hspace{0.4cm}
+    \begin{tikzpicture}
+        \node (w1) at (0,0) {$\epsilon$};
+        \node (n) at (0,1.2) {$j$};
+        \draw (w1) edge (n); 
+    \end{tikzpicture}
+    \hspace{0.4cm}
+    \begin{tikzpicture}
+        \node (w) at (0,0) {$\omega$};
+        \node[int] (v) at (0,.8) {};
+        \draw (w) edge (v);
+        \draw (v) edge +(0,-.3) edge[loop, crossed, distance=0.8cm] (v);
+    \end{tikzpicture}
+    \hspace{0.4cm}
+    \begin{tikzpicture}
+        \node (w) at (0,0) {$\epsilon$};
+        \node[int] (v) at (0,.8) {};
+        \draw (w) edge (v) (v) edge[loop, crossed, distance=0.8cm] (v);
+    \end{tikzpicture}
+\]
+
+In this list lie also many graphs that will successively killed by relations, for example the lone hair with two $\omega$ labels, $A_2$ graphs with a loop at $\tilde{v}$ or a a second $\omega$ hair incident to the crossed hair. Nonetheless, it is useful to have all these graphs in the list for completeness, and verifying that the algorithms run correctly in full generality.
+
+First we generate graphs where $\epsilon$ and $\omega$ hairs are unlabeled, so called \textit{unmarked blown-up components}, and then we mark them in every possible way. This is done in order to determine weight 11 relations later on, as explained below.
+
+These graphs are wrapped in Python objects which compute at construction all graph parameters such as genus, valence at the special vertices, odd symmetries, Specht module contributions and plotting structures.
+
+\subsection{Weight 2 and $3b)$ relations} Case $B_1$ graphs are grouped by the isomorphism class of their contraction at the crossed edge.
+This yields groups of blown-up components such that, any weight 2 cohomology relations or the $3b)$ relation restrict between graphs in the same group. In low excess, for most $B_1$ graphs the valence at $\tilde{v}$ is the minimal amount $4$, and thus one can automatically pick any graph in the group to get a basis. But for higher valence, we manually go through each weight 2 relation group, determine a basis and hardcode it directly into the script.
+
+\begin{remark} \label{rmk:weight2vanishing}
+    A $B_1$ graph with a multiple edge and valence $4$ is equivalent to a $B_1$ graph with a loop, and thus vanishes because of relation $3b)$. More generally, we note that if there exist two hairs or half-edges $s,t\in N_{\tilde{v}}$ in a graph $G_{\bar{v},B}^{\tilde{v},\{A,A'\}}$ with the property that it vanishes whenever the partition $A\sqcup A'$ doesn't separate $s$ and $t$, then, for every other $x,y\in N_{\tilde{v}}$ distinct from $s,t$, the following relation holds:
+\end{remark}
+\[  
+    \sum_{\substack{A\sqcup A'= N_{\tilde{v}}\\ s,x\in A, t,y\in A'}}
+    \begin{tikzpicture}
+        \node[int] (v) at (0,0) {};
+        \node[int] (w) at (0.5,0) {};
+        \node (s) at (-.1,.5)  {\tiny$s$};
+        \node (t) at (.6,.5)  {\tiny$t$};
+        \node (x) at (-.3,-.5) {\tiny$x$};
+        \node (y) at (.8,-.5) {\tiny$y$};
+        \draw (v) edge +(-.5,-.5) edge[dashed] +(-.5,.5) edge[dashed] +(-.5,.2) edge[dashed] +(-.5,-.2) edge[dashed] +(-.2,-.5) edge[crossed] (w) edge +(.1,.6)
+        (w) edge +(.5,-.5) edge[dashed] +(.5,.5) edge[dashed] +(.5,.2) edge[dashed] +(.5,-.2) edge[dashed] +(.2,-.5) edge +(-.1,.6);
+        \draw [decorate,decoration={brace,amplitude=5pt,mirror}]
+        (-.6,.5) -- (-.6,-.5) node[midway,xshift=-1em]{$A$};
+        \draw [decorate,decoration={brace,amplitude=5pt}]
+        (1,.5) -- (1,-.5) node[midway,xshift=1em]{$A'$};
+    \end{tikzpicture}
+    =
+    \sum_{\substack{A\sqcup A'= N_{\tilde{v}}\\ |A|,|A'|\geq 2 \\ x\in A, t,y\in A'}}
+    \begin{tikzpicture}
+        \node[int] (v) at (0,0) {};
+        \node[int] (w) at (0.5,0) {};
+        \node (t) at (.6,.5)  {\tiny$t$};
+        \node (x) at (-.3,-.5) {\tiny$x$};
+        \node (y) at (.8,-.5) {\tiny$y$};
+        \draw (v) edge +(-.5,-.5) edge[dashed] +(-.5,.5) edge[dashed] +(-.5,.2) edge[dashed] +(-.5,-.2) edge[dashed] +(-.2,-.5) edge[crossed] (w) edge +(.1,.6)
+        (w) edge +(.5,-.5) edge[dashed] +(.5,.5) edge[dashed] +(.5,.2) edge[dashed] +(.5,-.2) edge[dashed] +(.2,-.5) edge +(-.1,.6);
+        \draw [decorate,decoration={brace,amplitude=5pt,mirror}]
+        (-.6,.5) -- (-.6,-.5) node[midway,xshift=-1em]{$A$};
+        \draw [decorate,decoration={brace,amplitude=5pt}]
+        (1,.5) -- (1,-.5) node[midway,xshift=1em]{$A'$};
+    \end{tikzpicture}
+    =
+    \sum_{\substack{A\sqcup A'= N_{\tilde{v}}\\ |A|,|A'|\geq 2 \\ x\in A, t,s\in A'}}
+    \begin{tikzpicture}
+        \node[int] (v) at (0,0) {};
+        \node[int] (w) at (0.5,0) {};
+        \node (s) at (.6,.5)  {\tiny$s$};
+        \node (t) at (.4,.5)  {\tiny$t$};
+        \node (x) at (-.3,-.5) {\tiny$x$};
+        \draw (v) edge +(-.5,-.5) edge +(-.5,.5) edge[dashed] +(-.5,.2) edge[dashed] +(-.5,-.2) edge[dashed] +(-.2,-.5) edge[crossed] (w)
+        (w) edge[dashed] +(.5,-.5) edge[dashed] +(.5,.5) edge[dashed] +(.5,.2) edge[dashed] +(.5,-.2) edge[dashed] +(.2,-.5) edge +(-.3,.6) edge +(.3,.6);
+        \draw [decorate,decoration={brace,amplitude=5pt,mirror}]
+        (-.6,.5) -- (-.6,-.5) node[midway,xshift=-1em]{$A$};
+        \draw [decorate,decoration={brace,amplitude=5pt}]
+        (1,.5) -- (1,-.5) node[midway,xshift=1em]{$A'$};
+    \end{tikzpicture}
+    =0  
+\]
+This observation can be employed to kill all $B_1$ graphs in excess 3 and 4 which have multiple edges and valence $n_{\tilde{v}}\geq 5$, except one. These are shown in \ref{equ:weight2killings}, and they come in three different weight 2 relation groups. They all vanish, except for the last ones, which merely have a relation between them.
+
+\begin{multline} \label{equ:weight2killings}
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (1,0) {};
+        \node (w1) at (-.25,-.9) {$\omega$};
+        \node (w2) at (.25,-.9) {$\omega$};
+        \node (w3) at (1,-.9) {$\omega$};
+        \draw (v1) edge[crossed] (v2) edge[bend left=40, distance=0.6cm] (v2) edge (w1) edge (w2) (v2) edge (w3);
+    \end{tikzpicture}
+    =0  \hspace{2cm}
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (1,0) {};
+        \node[int] (v3) at (1.4,0) {};
+        \node (w1) at (0,-.9) {$\omega$};
+        \node (w2) at (.8,-.9) {$\omega$};
+        \node (w3) at (1.2,-.9) {$\omega$};
+        \node (w4) at (1.8,-.9) {$\omega$};
+        \draw (v1) edge[crossed] (v2) edge[bend left=40, distance=0.6cm] (v2) edge (w1);
+        \draw (v2) edge (w2) edge (v3);
+        \draw (v3) edge (w3) edge (w4);
+    \end{tikzpicture}
+    =0    \hspace{.8cm}
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (1,0) {};
+        \node[int] (v3) at (1.4,0) {};
+        \node (w1) at (0,-.9) {$\omega$};
+        \node (w2) at (.4,-.9) {$\omega$};
+        \node (w3) at (1.2,-.9) {$\omega$};
+        \node (w4) at (1.8,-.9) {$\omega$};
+        \draw (v1) edge[crossed] (v2) edge[bend left=40, distance=0.6cm] (v2) edge (w1) edge (w2);
+        \draw (v2) edge (v3);
+        \draw (v3) edge (w3) edge (w4);
+    \end{tikzpicture}
+    =0  \\
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (1,0) {};
+        \node (w1) at (-.25,-.9) {$\omega$};
+        \node (w2) at (.25,-.9) {$\omega$};
+        \node (n) at (1.4,1) {$j$};
+        \draw (v1) edge[crossed] (v2)  edge[bend left=40, distance=0.6cm] (v2) edge (w1) edge (w2);
+        \draw (v2) edge[bend right=30](n);
+    \end{tikzpicture}
+    =0 \hspace{.8cm}
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (1,0) {};
+        \node (w1) at (0,-.9) {$\omega$};
+        \node (w2) at (1,-.9) {$\omega$};
+        \node (n) at (1.4,1) {$j$};
+        \draw (v1) edge[crossed] (v2) edge[bend left=40, distance=0.6cm] (v2) edge (w1);
+        \draw (v2) edge[bend right=30](n) edge (w2);
+    \end{tikzpicture}
+    =0 \hspace{2cm}
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (1,0) {};
+        \node (w1) at (-.4,-.9) {$\omega$};
+        \node (w2) at (.4,-.9) {$\omega$};
+        \node (w3) at (1,-.9) {$\omega$};
+        \node (w4) at (0,-.9) {$\omega$};
+        \draw (v1) edge[crossed] (v2) edge[bend left=40, distance=0.6cm] (v2) edge (w1) edge (w2) edge (w4);
+        \draw (v2) edge (w3);
+    \end{tikzpicture}
+    +
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (1,0) {};
+        \node (w1) at (-.25,-.9) {$\omega$};
+        \node (w2) at (.25,-.9) {$\omega$};
+        \node (w3) at (.75,-.9) {$\omega$};
+        \node (w4) at (1.25,-.9) {$\omega$};
+        \draw (v1) edge[crossed] (v2) edge[bend left=40, distance=0.6cm] (v2) edge (w1) edge (w2);
+        \draw (v2) edge (w3) edge (w4);
+    \end{tikzpicture}
+    =0.
+\end{multline}
+
+Remark \ref{rmk:weight2vanishing} can also be used to kill other graphs, such as ones where the crossed edge is part of a triangle or where two half-edges being in at the same endpoint would create an odd symmetry:
+
+\begin{equation}
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (1,0) {};
+        \node[int] (v3) at (.5,.5) {};
+        \node (w1) at (-.25,-.9) {$\omega$};
+        \node (w2) at (.25,-.9) {$\omega$};
+        \node (w3) at (.9,-.7) {$\omega$};
+        \node (w4) at (1.25,-.9) {$\omega$};
+        \draw (v1) edge[crossed] (v2) edge (v3) edge (w1) edge (w2);
+        \draw (v2) edge (v3) edge (w4);
+        \draw (v3) edge (w3);
+    \end{tikzpicture}
+    =0  \hspace{1cm}
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (1,0) {};
+        \node[int] (v3) at (1.75,0) {};
+        \node[int] (v4) at (2.5,0) {};
+        \node (w1) at (-.25,-.9) {$\omega$};
+        \node (w2) at (.25,-.9) {$\omega$};
+        \node (w3) at (.75,-.9) {$\omega$};
+        \node (w4) at (1.25,-.9) {$\omega$};
+        \node (w5) at (1.75,-.9) {$\omega$};
+        \node (w6) at (2.25,-.9) {$\omega$};
+        \node (w7) at (2.75,-.9) {$\omega$};
+        \draw (v1) edge(v2)  edge (w1) edge (w2) (v2) edge[crossed] (v3)  edge (w3) edge (w4);
+        \draw (v3) edge (v4)  edge (w5) (v4) edge(w6)edge(w7);
+    \end{tikzpicture}
+    =0.
+\end{equation}
+
+\ref{equ:weight2groupof4} is another example in excess 4 of a weight 2 relation group. It contains the four graphs which appear as terms in the equation below, and one checks that all the relations turn out equivalent to this one. Thus, a basis for this group is determined by any three graphs.
+\begin{equation} \label{equ:weight2groupof4}
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (.75,0) {};
+        \node[int] (v3) at (1.5,0) {};
+        \node (j) at (.75,.9) {\small$j$};
+        \node (w1) at (-.4,-.8) {\small$\omega$};
+        \node (w2) at (0,-.8) {\small$\omega$};
+        \node (w3) at (.4,-.8) {\small$\omega$};
+        \node (w4) at (1.3,-.8) {\small$\omega$};
+        \node (w5) at (1.7,-.8) {\small$\omega$};
+        \draw (v1) edge[crossed](v2) edge(w1)edge(w2)edge(w3);
+        \draw (v2) edge(v3) edge(j)  (v3) edge(w4)edge(w5);
+    \end{tikzpicture} +
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (.75,0) {};
+        \node[int] (v3) at (1.5,0) {};
+        \node (j) at (.75,.9) {\small$j$};
+        \node (w1) at (-.2,-.8) {\small$\omega$};
+        \node (w2) at (.2,-.8) {\small$\omega$};
+        \node (w3) at (.75,-.8) {\small$\omega$};
+        \node (w4) at (1.3,-.8) {\small$\omega$};
+        \node (w5) at (1.7,-.8) {\small$\omega$};
+        \draw (v1) edge[crossed](v2) edge(w1)edge(w2);
+        \draw (v2) edge(v3) edge(w3) edge(j)  (v3) edge(w4)edge(w5);
+    \end{tikzpicture} -
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (.75,0) {};
+        \node[int] (v3) at (1.5,0) {};
+        \node (j) at (1.5,.9) {\small$j$};
+        \node (w1) at (-.2,-.8) {\small$\omega$};
+        \node (w2) at (.2,-.8) {\small$\omega$};
+        \node (w3) at (.75,-.8) {\small$\omega$};
+        \node (w4) at (1.3,-.8) {\small$\omega$};
+        \node (w5) at (1.7,-.8) {\small$\omega$};
+        \draw (v1) edge(v2) edge(w1)edge(w2);
+        \draw (v2) edge[crossed](v3) edge(w3)  (v3) edge(w4)edge(w5) edge(j);
+    \end{tikzpicture} -
+    \begin{tikzpicture}
+        \node[int] (v1) at (0,0) {};
+        \node[int] (v2) at (.75,0) {};
+        \node[int] (v3) at (1.5,0) {};
+        \node (j) at (1.5,.9) {\small$j$};
+        \node (w1) at (-.4,-.8) {\small$\omega$};
+        \node (w2) at (.1,-.8) {\small$\omega$};
+        \node (w3) at (.5,-.8) {\small$\omega$};
+        \node (w4) at (1,-.8) {\small$\omega$};
+        \node (w5) at (1.5,-.8) {\small$\omega$};
+        \draw (v1) edge(v2) edge(w1)edge(w2);
+        \draw (v2) edge[crossed](v3) edge(w3)edge(w4)  (v3) edge(w5) edge(j);
+    \end{tikzpicture}
+    =0
+\end{equation}
+
+
+\subsection{Generating blown-up representations}  First we remove odd symmetries, weight 2 and $3b)$ relations, and $A_2$ graphs which are related to $B_{irr}$ graphs through relation $4$. Then, we build so called \textit{blown-up graphs}. These are all unordered lists of the remaining blown-up components of excess $\geq 1$ which have exactly one crossed component, total number of $\omega$ hairs less than or equal to $11$, excesses summing up to less than or equal to $E_{max}-22$, and which don't contain more than once components that create an odd symmetry when exchanged by an automorphism. We explain this last condition.
+
+Two isomorphic blown-up components (which don't individually have an odd symmetry already) create an odd symmetry if and only if they have no $j$ hairs (because automorphisms don't exchange the $j$ hairs) and have an odd number of internal edges plus $\epsilon$ hairs. Also the lone hair with two $\epsilon$ labels is of this type.
+
+Blown-up graphs are likewise wrapped in a Python object and stored in a dataframe, along with aggregate quantities from the list of blown-up components. Note that these lists have an excess value but don't yet determine a unique generator, as we haven't pinned down which $(g,n)$ pair of the excess class we are considering. The possible $(g,n)$ pairs are determined by how many lone $j$ hairs vs tripods it is possible to append to the list of components.
+
+
+
+\subsection{Weight 11 relations}
+
+
+\subsection{Weight 13 relations}
+
+
+
+\subsection{Reading list of blown-up graphs}
