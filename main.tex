@@ -22,6 +22,7 @@
 \usetikzlibrary{arrows,decorations.markings}
 \usepackage{tikz-cd}
 \usepackage{stmaryrd}
+\usepackage{pdfpages}
 
 \pgfarrowsdeclare{bad to}{bad to}
 {
@@ -183,6 +184,7 @@
 \usepackage[all,cmtip]{xy}
 
 \usepackage{multicol}
+\usepackage{multirow, bigstrut}
 \usepackage{enumitem}
 
 \usetikzlibrary{matrix}
@@ -432,7 +434,7 @@
 
 
 
-\input{Introduction}
+%\input{Introduction}
 
 \input{SimplifiedGraphComplex}
 
@@ -440,9 +442,11 @@
 
 \input{Computations}
 
-\input{Appendix}
-
+%\input{Appendix}
 
 \bibliographystyle{amsplain}
 \bibliography{refs}
+
+%\includepdf[pages=-]{VirtualBlowups_excess3.pdf}
+
 \end{document}

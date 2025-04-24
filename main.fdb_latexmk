@@ -1,5 +1,5 @@
 # Fdb version 4
-["bibtex main"] 0 "main.aux" "main.bbl" "main" 0 0
+["bibtex main"] 0 "main.aux" "main.bbl" "main" 1745517165.90175 0
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/amscls/amsplain.bst" 1513722769 25798 9b3546f2f237ee0ce4724eed95f954f4 ""
   "main.aux" 0 -1 0 "pdflatex"
   "refs.bib" 0 -1 0 ""
@@ -7,8 +7,8 @@
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1745476910.65129 "/Users/marcobelli/Documents/MATHEMATICS/Getzler-Kapranov-Graph-Cohomology-Computations-in-weight-13/main.tex" "main.pdf" "main" 1745477045.04113 0
-  "/Users/marcobelli/Documents/MATHEMATICS/Getzler-Kapranov-Graph-Cohomology-Computations-in-weight-13/main.tex" 1745476871.21594 11644 eb36a1221ad66de65b40173e6e018836 ""
+["pdflatex"] 1745517159.88631 "/Users/marcobelli/Documents/MATHEMATICS/Getzler-Kapranov-Graph-Cohomology-Computations-in-weight-13/main.tex" "main.pdf" "main" 1745517165.90207 0
+  "/Users/marcobelli/Documents/MATHEMATICS/Getzler-Kapranov-Graph-Cohomology-Computations-in-weight-13/main.tex" 1745515699.88424 11751 4f8a0b17be969842dbd172a74a1d5e9e ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -235,6 +235,7 @@
   "/usr/local/texlive/2025/texmf-dist/tex/latex/comment/comment.sty" 1472166125 10197 204f75d5d8d88aa345a8c402e879e63b ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/enumitem/enumitem.sty" 1738874546 52272 63d293bc0d496619edb57585740861a2 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty" 1579991033 13886 d1306dcf79a944f6988e688c1785f9ce ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/eso-pic/eso-pic.sty" 1683144721 11876 6ef493863ae0d7a984706973240c2237 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1739306980 46850 d87daedc2abdc653769a6f1067849fe0 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty" 1705955721 43712 c3d93734f3bc56e03c21b3dc69268d3c ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/fvextra/fvextra.sty" 1741210328 114780 8f122e4cec6e0ef004709dbe67456f27 ""
@@ -245,6 +246,7 @@
   "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty" 1730496337 18363 dee506cb8d56825d8a4d020f5d5f8704 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty" 1717359999 8010 6f2ad8c2b2ffbd607af6475441c7b5e4 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty" 1717359999 2671 70891d50dac933918b827d326687c6e8 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/lscape.sty" 1717359999 1822 ce7e39e35ea3027d24b527bd5c5034d5 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx" 1667332637 2885 9c645d672ae17285bba324998918efd8 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty" 1717359999 4023 2c9f39712cf7b43d3eb93a8bbd5c8f67 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/hycolor/hycolor.sty" 1580250785 17914 4c28a13fc3d975e6e81c9bea1d697276 ""
@@ -265,6 +267,12 @@
   "/usr/local/texlive/2025/texmf-dist/tex/latex/lineno/lineno.sty" 1738182647 154882 28bfba3d27ac868f944c98d1dd51fd65 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/mathtools/mathtools.sty" 1728349409 62711 3b0ed1d68b598a75677c10d16646d5e5 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/mathtools/mhsetup.sty" 1616101747 5582 a43dedf8e5ec418356f1e9dfe5d29fc3 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/multirow/bigstrut.sty" 1731446765 1247 ad9c051d05d2ba5acb510c224c9a7c44 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/multirow/multirow.sty" 1731446765 6696 886c9f3087d0b973ed2c19aa79cb3023 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty" 1667072951 6572 ea530fbbe537629fd97736d33babc07d ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/pdflscape/pdflscape.sty" 1667072951 2224 1230ab76aa62221ccbd90bca8c8c015e ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/pdfpages/pdfpages.sty" 1738442568 56557 52caee30c1fe86973ee17a572171abb0 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/pdfpages/pppdftex.def" 1738442568 6446 d89a65b3f6b4b32146b499348640e1cf ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty" 1601326656 1090 bae35ef70b3168089ef166db3e66f5b2 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty" 1673816307 373 00b204b1d7d095b892ad31a7494b0373 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty" 1601326656 21013 f4ff83d25bb56552493b030f27c075ae ""
@@ -301,15 +309,13 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1745340022 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1745339590 3345734 c885fa19812e7e53b7f95d9e1939f4fd ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "Appendix.tex" 1745314297.84042 27971 f4c1aa9fcfbafb64ace020a1ed6fb111 ""
-  "Computations.tex" 1745476871.18187 1436 6132b036ea9a8a0c4000ef650417307d ""
-  "ComputerProgram.tex" 1745476871.18222 16510 d322a30f2192da7d4d2be1f1106a7185 ""
-  "Introduction.tex" 1745401758.96456 1479 95d322f59e71d1f074fe3d5038367222 ""
+  "Computations.tex" 1745517159.41074 10703 fe6532c58511ae8aa7ed347b6b6fa3ed ""
+  "ComputerProgram.tex" 1745499873.77761 30083 f84934d8ae92205e86f9b7d4eed183e2 ""
   "SimplifiedGraphComplex.tex" 1745419150.68322 32665 15c52a399633fce525b643e40bb950fa ""
-  "main.aux" 1745476965.06059 5439 57b060888bd12fb2835a42dae2c345f6 "pdflatex"
+  "main.aux" 1745517165.27664 3774 8db98fd3f88be134243987dbd9e9ba5f "pdflatex"
   "main.bbl" 1745314297.85996 1429 b17fda4032684588cd92c1da288fda3d "bibtex main"
-  "main.out" 1745476965.06491 4573 dda076694977bcb614524b9baa0b6d88 "pdflatex"
-  "main.tex" 1745476871.21594 11644 eb36a1221ad66de65b40173e6e018836 ""
+  "main.out" 1745517165.27794 3517 e0291a1468984046c8f4d22f6ce3ec68 "pdflatex"
+  "main.tex" 1745515699.88424 11751 4f8a0b17be969842dbd172a74a1d5e9e ""
   (generated)
   "main.aux"
   "main.log"
