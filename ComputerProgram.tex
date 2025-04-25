@@ -3,9 +3,11 @@
 
 \newcommand{\myB}{\bGK^{12,1}}
 
-We use Python to generate all possible blown-up representations of the relevant decorated graphs with a certain upper excess bound $E_{max}$. The script is in the format of a Jupyter Notebook. The graphs are generated using Sage's builtin interface for the Nauty library, and are later wrapped in Python objects that make available the graph features for easy access. We use Pandas to store the large amounts of python objects in dataframes along with many of their parameters (excess, edges, etc), which enables the user to take advantege of many useful data management tools like querying, sorting and grouping. Finally, we use Matplotlib to either show the graphs in the output cells or save them in a pdf file.
+We use Python to generate all possible blown-up representations of the relevant decorated graphs with a certain upper excess bound $E_{max}$. The script is in the format of a Jupyter Notebook. The graphs are generated using Sage's builtin interface for the Nauty library, and are later wrapped in Python objects that store many graph features. We use Pandas to store the large amounts of python objects in dataframes along with many of their parameters (excess, edges, etc), which enables the user to take advantege of many useful data management tools like querying, sorting and grouping. Finally, we use Matplotlib to either show the graphs in the output cells or save them in a pdf file.
 
-\subsection{Generate blown-up components} These are all the connected graphs with trivalent vertices, hairs labeled by $\epsilon,\omega$ or $j$ such that $0\leq 3(g-1)+3|\epsilon|+|\omega|+2|j| \leq E_{max}-22$, and falling under exactly one of the following cases:
+The project is saved in \href{https://github.com/bellimarco/Getzler-Kapranov-Graph-Cohomology-Computations-in-weight-13}{this} GitHub repository.
+
+\subsection{Generate blown-up components} These are all the connected graphs with trivalent vertices, hairs labeled by $\epsilon,\omega$ or $j$ such that $0\leq 3(g-1)+3|\epsilon|+|\omega|+2|j| \leq E_{max}-25$, and falling under exactly one of the following cases:
 \begin{enumerate}
     \item simple,
     \item simple and with a crossed $\omega$ hair,
@@ -58,9 +60,7 @@ We also add manually the following seven bonus graphs:
     \end{tikzpicture}
 \]
 
-In this list lie also many graphs that will successively killed by relations, for example the lone hair with two $\omega$ labels, $A_2$ graphs with a loop at $\tilde{v}$ or a a second $\omega$ hair incident to the crossed hair. Nonetheless, it is useful to have all these graphs in the list for completeness, and verifying that the algorithms run correctly in full generality.
-
-First we generate graphs where $\epsilon$ and $\omega$ hairs are unlabeled, so called \textit{unmarked blown-up components}, and then we mark them in every possible way. This is done in order to determine weight 11 relations later on, as explained below.
+In this list of blown-up graphs also lie many that will be later killed by relations, for example the lone hair with two $\omega$ labels, $A_2$ graphs with a loop at $\tilde{v}$ or a a second $\omega$ hair incident to the crossed hair. Nonetheless, it is useful to have all these graphs in the list for completeness, and verifying that the algorithms run correctly in full generality.
 
 These graphs are wrapped in Python objects which compute at construction all graph parameters such as genus, valence at the special vertices, odd symmetries, Specht module contributions and plotting structures.
 
@@ -359,7 +359,7 @@ The corresponding weight 11 relation is an integer-weighted alternating sum of t
 
 Thus, we group by the list of so called \textit{$A_2$ components} to determine weight 13 relation groups of $A_2$ blown-up graphs. Again, this can be done at the virtual level by ignoring the lone $\omega-j$ hairs and the tripods with $\omega$ labels.
 
-For example, the two blown-up components in \ref{equ:weight13relationexample} determine in excess 4 a weight 13 relation group of seven virtual blown-up graphs. One can check that they all have the same list of blown-up components after removing $\tilde{v}$ (up to lone hairs and tripods).  The graph with two tripods glued to $\tilde{v}$ (or with two hairs of the same tripod) are not listed because they would have an odd symmetry. Note again not all blown-up graphs have the same $(g,n)$-range.
+For example, the two blown-up components in \ref{equ:weight13relationexample} determine in excess 4 a weight 13 relation group of seven virtual blown-up graphs. One can check that they all have the same list of blown-up components after removing $\tilde{v}$ (up to lone hairs and tripods).  The graph with two tripods glued to $\tilde{v}$ (or with two hairs of the same tripod) are not listed because they would have an odd symmetry. Note again that not all blown-up graphs have the same $(g,n)$-range.
 
 \begin{multline} \label{equ:weight13relationexample}
     \begin{tikzpicture}
@@ -519,8 +519,8 @@ Having at disposal the Specht module contributions of each generator of the comp
 
 The virtual or completed blown-up graphs can be printed by excess or by the $(g,n)$ pair respectively. They are further grouped by the amount of internal edges (which for virtual blown-ups can be written dependently on $n$) and the cases $A_3,A_2,B_1,B_{irr}$.
 
-Over each blown-up graph is written a unique identifier, the Specht module contribution of the graph and, for virtual blown-ups, the values of $n$ for which the graph can be completed to a $(g,n)$ graph of the given excess. Note that the actual Specht module contribution might not be accurate for graphs in non-trivial relation groups; it has to be computed manually for each group as a whole.
+Over each blown-up graph is written a unique identifier, the Specht module contribution of the graph and, for virtual blown-ups, the values of $n$ for which the graph can be completed to a $(g,n)$ graph of the given excess. Note that the actual Specht module contribution might not be accurate for graphs in non-trivial relation groups; it has to be computed manually for each group as a whole. 
 
-In addition, next to each ID we write the ID of the chosen term for the gaussian elimination process; this is explained in \ref{sec:Computations}.
+In addition, over most graphs we write the ID of the chosen term for the gaussian elimination process; this is explained in \ref{sec:Computations}.
 
 The start and endpoint of the list of components of each blown-up graph is distinguished by the crossed component, which is always displayed rightmost within its list. In the cases $A_2, B_1$ and $B_{irr}$, graphs in the same relation group are written side by side and on multiple consecutive rows if necessary. When a relation group ends, the next one starts on the row below. Since there are many weight 11 relation groups of size one, which thus form an indipendent set, we display them all in the same rows without line breaking, as we do for graphs in case $A_3$.
