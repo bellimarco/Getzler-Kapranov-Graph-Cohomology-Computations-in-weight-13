@@ -7,7 +7,7 @@ We use Python to generate all possible blown-up representations of the relevant 
 
 The project is saved in \href{https://github.com/bellimarco/Getzler-Kapranov-Graph-Cohomology-Computations-in-weight-13}{this} GitHub repository.
 
-\subsection{Generate blown-up components} These are all the connected graphs with trivalent vertices, hairs labeled by $\epsilon,\omega$ or $j$ such that $0\leq 3(g-1)+3|\epsilon|+|\omega|+2|j| \leq E_{max}-25$, and falling under exactly one of the following cases:
+\subsection{Generate blown-up components} \label{subsec:genBlownup} These are all the connected graphs with trivalent vertices, hairs labeled by $\epsilon,\omega$ or $j$ such that $0\leq 3(g-1)+3|\epsilon|+|\omega|+2|j| \leq E_{max}-25$, and falling under exactly one of the following cases:
 \begin{enumerate}
     \item simple,
     \item simple and with a crossed $\omega$ hair,
@@ -65,7 +65,11 @@ In this list of blown-up graphs also lie many that will be later killed by relat
 These graphs are wrapped in Python objects which compute at construction all graph parameters such as genus, valence at the special vertices, odd symmetries, Specht module contributions and plotting structures.
 
 \subsection{Weight 2 and $3b)$ relations} Case $B_1$ graphs are grouped by the isomorphism class of their contraction at the crossed edge.
-This yields groups of blown-up components such that, any weight 2 cohomology relations or the $3b)$ relation restrict between graphs in the same group. In low excess, for most $B_1$ graphs the valence at $\tilde{v}$ is the minimal amount $4$, and thus one can automatically pick any graph in the group to get a basis. But for higher valence, we manually go through each weight 2 relation group, determine a basis and hardcode it directly into the script.
+This yields groups of blown-up components such that, any weight 2 cohomology relations or the $3b)$ relation restrict between graphs in the same group.
+
+It is important to keep in mind that the $B_1$ graphs we generated in \ref{subsec:genBlownup} do not represent all decorated graphs with $\delta\{\substack{A\\A'}\}$ classes. We have ignored the ones with loops or multiple edges incident to just one end of the crossed edge. Because they are killed by the $3b$ relation or odd symmetries, they might also influence the relation group without appearing in our list.
+
+There are three easy cases to handle automatically. If a weight 2 relation group has size one with an odd graph, then it vanishes. If a group has size one and the contraction at the crossed edge doesn't have loops nor multiple edges, then it vanishes if and only if the single graph in the group has an odd symmetry. If a group is of minimal valence $n_{\tilde{v}}=4$, then it vanishes if and only if any of its graphs have odd symmetries or its contraction at the crossed edge has loops or multiple edges. For higher group sizes or higher valence, we manually check each weight 2 relation group and hardcode a basis into the script.
 
 \begin{remark} \label{rmk:weight2vanishing}
     A $B_1$ graph with a multiple edge and valence $4$ is equivalent to a $B_1$ graph with a loop, and thus vanishes because of relation $3b)$. More generally, we note that if there exist two hairs or half-edges $s,t\in N_{\tilde{v}}$ in a graph $G_{\bar{v},B}^{\tilde{v},\{A,A'\}}$ with the property that it vanishes whenever the partition $A\sqcup A'$ doesn't separate $s$ and $t$, then, for every other $x,y\in N_{\tilde{v}}$ distinct from $s,t$, the following relation holds:

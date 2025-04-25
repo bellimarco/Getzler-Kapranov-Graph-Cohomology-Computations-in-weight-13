@@ -1,5 +1,5 @@
 # Fdb version 4
-["bibtex main"] 0 "main.aux" "main.bbl" "main" 0 0
+["bibtex main"] 0 "main.aux" "main.bbl" "main" 1745584460.10077 0
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/amscls/amsplain.bst" 1513722769 25798 9b3546f2f237ee0ce4724eed95f954f4 ""
   "main.aux" 0 -1 0 "pdflatex"
   "refs.bib" 0 -1 0 ""
@@ -7,7 +7,7 @@
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1745571285.931 "/Users/marcobelli/Documents/MATHEMATICS/Getzler-Kapranov-Graph-Cohomology-Computations-in-weight-13/main.tex" "main.pdf" "main" 1745571318.96404 0
+["pdflatex"] 1745584441.90901 "/Users/marcobelli/Documents/MATHEMATICS/Getzler-Kapranov-Graph-Cohomology-Computations-in-weight-13/main.tex" "main.pdf" "main" 1745584460.1011 0
   "/Users/marcobelli/Documents/MATHEMATICS/Getzler-Kapranov-Graph-Cohomology-Computations-in-weight-13/main.tex" 1745571282.50182 11746 45a4660703ab66adcbd4bcd4b5473347 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -312,13 +312,13 @@
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1745339590 3345734 c885fa19812e7e53b7f95d9e1939f4fd ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
   "Appendix.tex" 1745314297.84042 27971 f4c1aa9fcfbafb64ace020a1ed6fb111 ""
-  "Computations.tex" 1745571282.37741 11275 9e5cb65c5ded105dba749a8f388fc688 ""
-  "ComputerProgram.tex" 1745571282.38839 29965 014b1139a7ac5266deeded7462a34137 ""
+  "Computations.tex" 1745584440.26393 11237 8436797b9252864a887ebf64b1903e34 ""
+  "ComputerProgram.tex" 1745576275.13565 30739 ce4778de0902f612ca2c3e33dff6cc6a ""
   "Introduction.tex" 1745571282.4176 2126 96e036166e23d1915489c276a4592279 ""
-  "SimplifiedGraphComplex.tex" 1745571282.41848 32718 32ec58963b532bf9374176043b13fdb3 ""
-  "main.aux" 1745571315.28669 6241 1f75dca11b6c40fb717df6c3c58c206a "pdflatex"
+  "SimplifiedGraphComplex.tex" 1745572620.27828 32718 32ec58963b532bf9374176043b13fdb3 ""
+  "main.aux" 1745584458.79867 6330 66adda7a8196effbd6861e47b258a220 "pdflatex"
   "main.bbl" 1745314297.85996 1429 b17fda4032684588cd92c1da288fda3d "bibtex main"
-  "main.out" 1745571315.28807 5162 4ece32ff2700c204318c47d74e09638e "pdflatex"
+  "main.out" 1745584458.80959 5162 4ece32ff2700c204318c47d74e09638e "pdflatex"
   "main.tex" 1745571282.50182 11746 45a4660703ab66adcbd4bcd4b5473347 ""
   (generated)
   "main.aux"
