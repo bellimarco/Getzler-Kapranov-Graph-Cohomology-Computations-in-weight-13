@@ -1,1 +1,10 @@
 .json
+main.aux
+main.bbl
+main.fdb_latexmk
+main.fls
+main.log
+main.out
+main.synctex.gz
+.tex
+.DS_Store
